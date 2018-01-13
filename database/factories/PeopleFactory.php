@@ -9,7 +9,7 @@ $factory->define(App\People::class, function (Faker $faker) {
         'firstname'  => $faker->firstName('male'),
         'lastname'  => $faker->lastName,
         'address'  => $faker->address,
-        'imageurl' => $faker->image($width, $height, 'cats'),
+        'imageurl' => $faker->imageUrl($width, $height, 'cats'),
 
 
     ];
