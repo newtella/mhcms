@@ -11,7 +11,10 @@
     <title>{{ config('app.name', 'MuniHuite') }}</title>
 
     <!-- Styles -->
+    
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/fontawesome-all.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/mhcss.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -48,6 +51,7 @@
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+                                <i class="fas fa-user-circle fa-lg"></i>
                                     {{ Auth::user()->username }} <span class="caret"></span>
                                 </a>
 
@@ -70,8 +74,9 @@
                 </div>
             </div>
         </nav>
-
+        <div class="container">
         @yield('content')
+        </div>
     </div>
 
     <!-- Scripts -->
