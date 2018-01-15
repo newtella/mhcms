@@ -7,14 +7,23 @@ use Illuminate\Http\Request;
 
 class RolController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
-        //
+        $roles = Rol::paginate(5);
+        return view('auth.dashboard.rols.index', compact('roles'));
+
     }
 
     /**

@@ -1,22 +1,33 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use DB;
 use App\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Responses
      */
     public function index()
     {
+        $categories = Category::paginate(5);
+        return view('auth.dashboard.categories.index', compact('categories'));
      
 
     }
+
+
+    
 
     /**
      * Show the form for creating a new resource.
@@ -47,7 +58,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        
     }
 
     /**

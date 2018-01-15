@@ -19,7 +19,6 @@
         "vue": "^2.5.7"
     },
     "dependencies": {
-        "datatables.net": "^1.10.16",
-        "datatables.net-dt": "^1.10.16"
+        
     }
 }
