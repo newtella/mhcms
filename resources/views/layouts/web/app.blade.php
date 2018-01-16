@@ -18,10 +18,23 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
+        <nav class="navbar navbar-inverse navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
-
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <!-- Branding Image -->
+                            <a class="navbar-brand" href="{{ url('/') }}">
+                                {{ config('', 'MuniHuite') }}
+                            </a>
+                            <li><a href="#home-sec">Inicio</a></li>
+                            <li><a href="#features-sec">Tu Muni</a></li>
+                            <li><a href="#advance-sec">Informacion Publica</a></li>
+                            <li><a href="#gallery-sec">Solicitud de Informacion</a></li>
+                            <li><a href="#location-sec">Tramite y Servicios</a></li>
+                        </ul>
+                    </div>
+                    
                     <!-- Collapsed Hamburger -->
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse" aria-expanded="false">
                         <span class="sr-only">Toggle Navigation</span>
@@ -30,16 +43,16 @@
                         <span class="icon-bar"></span>
                     </button>
 
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('', 'MuniHuite') }}
-                    </a>
-                </div>
+                    
 
+                
+                </div>
+               
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;
+                        
+                    
                     </ul>
 
                     <!-- Right Side Of Navbar -->

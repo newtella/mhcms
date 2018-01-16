@@ -1,9 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\People;
 
-class PeopleTableSeeder extends Seeder
+class CommentsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,6 +11,6 @@ class PeopleTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\People::class, 20)->create();
+        factory(App\Comment::class, 5)->create();
     }
 }

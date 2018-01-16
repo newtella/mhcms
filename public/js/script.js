@@ -1,3 +1,35 @@
+$(document).ready( function(){
+console.log("gggg");
+    $('#summernote').summernote({
+        
+
+        height: 300,
+
+   });
+
+   $('#title').on('keypress', function(){
+        
+    var title = $('#title').val();
+    title = title.toLowerCase();
+    var slug = replaceAll(title,' ','-');
+ 
+    
+    $('#slug').val(slug);
+
+
+   });
+   
+   function replaceAll(str, find, replace) {
+    return str.replace(new RegExp(find, 'g'), replace);
+    }
+
+
+
+
+});
+
+
+
 function loadPage() {
     // var arrayUrl = url.split('/');
     // $.get(url, {}, function (data, status) {
@@ -11,22 +43,6 @@ function loadPage() {
     
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

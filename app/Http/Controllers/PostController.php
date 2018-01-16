@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\Category;
+use App\User;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -14,7 +16,11 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $articles = Post::with('user','category')->paginate(5);
+        return view('auth.dashboard.articles.index', compact('articles'));
+
+        
+
     }
 
     /**

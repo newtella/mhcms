@@ -16,14 +16,12 @@ class CreatePostsTable extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->string('title', 128);
             $table->string('name', 128);
-            $table->text('body');
-
             $table->string('slug', 128)->unique();
             $table->integer('category_id')->unsigned();
-            
             $table->mediumText('excerpt')->nullable();
+            $table->string('imageurl')->nullable();
+            $table->text('body');
             $table->enum('status',['PUBLISHED','DRAFT'])->default('DRAFT');
             $table->integer('user_id')->unsigned();
             $table->timestamps();
@@ -35,6 +33,10 @@ class CreatePostsTable extends Migration
             $table->foreign('category_id')->references('id')->on('categories')
                     ->onDelete('cascade')
                     ->onUpdate('cascade');
+
+            
+
+            
 
 
         });

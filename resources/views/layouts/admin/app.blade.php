@@ -4,17 +4,17 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'MuniHuite') }}</title>
 
     <!-- Styles -->
-    
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/fontawesome-all.css') }}" rel="stylesheet">
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.4/summernote.css" rel="stylesheet">
     <link href="{{ asset('css/mhcss.css') }}" rel="stylesheet">
+    <!-- <link href="{{ asset('css/summernote.css') }}" rel="stylesheet"> -->
 </head>
 <body>
     <div id="app">
@@ -88,7 +88,7 @@
                 <div class="toptitle well">
                     <div class="marginbottom list-group">
                         <h4 class="text-muted"><i class="fas fa-address-card"></i> Administraci&oacute;n</h4>
-                    <a href="" class="list-group-item"> <i class="fas fa-newspaper"></i> Articulos</a>
+                    <a href="{{route('articles.index')}}" class="list-group-item"> <i class="fas fa-newspaper"></i> Articulos</a>
                     <a href="" class="list-group-item"> <i class="fas fa-comments"></i> Comentarios</a>
                     <a href="" class="list-group-item"> <i class="fas fa-tags"></i> Etiquetas</a>
                     <a href="{{route('categories.index')}}" class="list-group-item"> <i class="fas fa-list"></i> Categorias</a>
@@ -115,16 +115,21 @@
 </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/script.js')}}"></script>
-    <script src="{{ asset('js/app.js') }}"></script>
-
-    <script src="{{ asset('assets/jquery/jquery-1.12.4.min.js') }}"></script>
     
-    <script src="{{ asset('assets/dataTables/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.4/summernote.js"></script>
+    <script src="{{ asset('js/script.js')}}"></script>
 
-    <script src="{{ asset('assets/validator/validator.min.js') }}"></script>
+    <!-- <script src="{{ asset('js/summernote.min.js') }}"></script> -->
+
+    
     
     
    
 </body>
+
+
+
+
 </html>

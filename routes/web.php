@@ -11,8 +11,15 @@
 |
 */
 
+use App\Post;
+use App\Http\Controllers\FileController;
+
+
+
+
 Route::get('/', function () {
-    return view('welcome');
+    $posts = Post::orderby('id', 'DESC')->where('status','DRAFT')->simplePaginate(5);
+    return view('welcome', compact('posts'));
 });
 
 Auth::routes();
@@ -20,4 +27,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('categories', 'CategoryController');
 Route::resource('rols', 'RolController');
+Route::resource('articles', 'PostController');
+
+Route::get('summernote', 'FileController@getSummernote');
+Route::post('summernote', 'FileController@postSummernote')->name('summernote.post');
 
