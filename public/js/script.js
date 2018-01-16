@@ -30,25 +30,32 @@ console.log("gggg");
 
 
 
-function loadPage() {
-    // var arrayUrl = url.split('/');
-    // $.get(url, {}, function (data, status) {
-    //     $("#content-primary").html(data);
+/*
+--- Usuario
+*/
+// Agregar registro
 
-    //     readRecords(arrayUrl[1]);
-
-    alert("funciona el click");
-
-    
-    
-
+function loadPage(url)
+{
+    var arrayUrl = url.split('/');
+    $.get(url, {}, function (data, status) {
+        $("#content_primary").html(data);
+        readRecords(arrayUrl[1]);
+    });
 }
 
+function readRecords(modelo) {
+    $.get("ajax/" + modelo + "/Listar.php", {}, function (data, status) {
+        $(".records_content").html(data);
+    });
 
+    
+}
 
-// Agregar registro
-function addRecord() {
-    // obtenemos los valores
+function addUser() {
+    var url = "ajax/user/Crear.php";
+    var arrayUrl = url.split('/');  
+
     var nombre = $("#nombre").val();
     nombre = nombre.trim();
     var apellidos = $("#apellidos").val();
@@ -72,7 +79,7 @@ function addRecord() {
     }
     else {
         // Agregar registro
-        $.post("ajax/User/Crear.php", {
+        $.post(url, {
             nombre: nombre,
             apellidos: apellidos,
             direccion: direccion,
@@ -82,8 +89,8 @@ function addRecord() {
             $("#add_new_record_modal").modal("hide");
  
             // volvemos a leer los registros
-            readRecords();
- 
+            readRecords(arrayUrl[1]);
+
             // limpiamos los campos del formulario modal
             $("#nombre").val("");
             $("#apellidos").val("");
@@ -94,16 +101,21 @@ function addRecord() {
 }
 
 // Obtener registros
-function readRecords(modelo) {
-    $.get("ajax/" + modelo + "/Listar.php", {}, function (data, status) {
+/* function readRecords() {
+    $.get("ajax/user/Listar.php", {}, function (data, status) {
         $(".records_content").html(data);
     });
-}
+} */
 
-function getDetails(id) {
+
+
+function getUser(id) {
+    var url = "ajax/user/Detalle.php";
+    var arrayUrl = url.split('/');
+
     // Obtenemos el id del campo oculto
     $("#hidden_usuario_id").val(id);
-    $.post("ajax/User/Detalle.php", {
+    $.post(url, {
             id: id
         },
         function (data, status) {
@@ -121,7 +133,10 @@ function getDetails(id) {
     $("#update_user_modal").modal("show");
 }
 
-function updateRecord() {
+function updateUser() {
+    var url = "ajax/user/Editar.php";
+    var arrayUrl = url.split('/');
+
     // obtenemos los valores
     var nombre = $("#update_nombre").val();
     nombre = nombre.trim();
@@ -149,7 +164,7 @@ function updateRecord() {
         var id = $("#hidden_usuario_id").val();
  
         // Actualizamos los datos por medio de ajax
-        $.post("ajax/User/Editar.php", {
+        $.post(url, {
                 id: id,
                 nombre: nombre,
                 apellidos: apellidos,
@@ -160,23 +175,25 @@ function updateRecord() {
                 // ocultamos la ventana modal
                 $("#update_user_modal").modal("hide");
                 // recargamos los registros utilizando readRecords();
-                readRecords();
+                readRecords(arrayUrl[1]);
             }
         );
     }
 }
 
-function deleteRecord(id) {
+function deleteUser(id) {
+    var url = "ajax/user/Eliminar.php";
+    var arrayUrl = url.split('/');
+
     var conf = confirm("Esta seguro de borrar este registro?");
     if (conf == true) {
-        $.post("ajax/User/Eliminar.php", {
+        $.post(url, {
                 id: id
             },
             function (data, status) {
                 // recargamos los registros utilizando readRecords();
-                readRecords();
+                readRecords(arrayUrl[1]);
             }
         );
     }
 }
-
