@@ -52,6 +52,67 @@ function readRecords(modelo) {
     
 }
 
+
+
+function addPost() {
+    // var url = "ajax/user/Crear.php";
+    // var arrayUrl = url.split('/');  
+
+    var titulo = $("#title").val();
+    titulo = titulo.trim();
+    var slug = $("#slug").val();
+    slug = slug.trim();
+    var categoria = $("#category").val();
+    categoria = categoria.trim();
+    var tag = $("#tag").val();
+    tag = tag.trim();
+    var mensaje = $("#body").val();
+    
+ 
+    if (titulo == "") {
+        alert("El campo nombre es requerido!");
+    }
+    else if (slug == "") {
+        alert("El campo apellidos es requerido!");
+    }
+    else if (categoria == "") {
+        alert("El campo apellidos es requerido!");
+    }
+    else if (tag == "") {
+        alert("El campo correo electronico es requerido!");
+    }
+    
+    else {
+        // Agregar registro
+        $.post(url, {
+            titulo: titulo,
+            slug: slug,
+            categoria: categoria,
+            tag: tag
+        }, function (data, status) {
+            // cerramos el formulario modal
+            $("#add_new_record_modal").modal("hide");
+ 
+            // volvemos a leer los registros
+            readRecords(arrayUrl[1]);
+
+            // limpiamos los campos del formulario modal
+            $("#title").val("");
+            $("#slug").val("");
+            $("#categoria").val("");
+            $("#tag").val("");
+        });
+    }
+}
+
+
+
+
+
+
+
+
+
 function addUser() {
     var url = "ajax/user/Crear.php";
     var arrayUrl = url.split('/');  

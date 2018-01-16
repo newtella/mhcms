@@ -57,7 +57,7 @@
 						<label for="direccion">Categoria</label>
 						<select class="selectpicker form-control">
 							@foreach($articles as $article)
-  							<option><td>{{$article->category->name}}</td></option>
+  							<option value="{{$article->category->id}}"><td>{{$article->category->name}}</td></option>
 							@endforeach
 						</select>
 					</div>
