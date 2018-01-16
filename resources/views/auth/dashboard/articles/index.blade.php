@@ -54,14 +54,22 @@
 	                </div>
 
 	                <div class="form-group">
-	                    <label for="direccion">Categoria</label>
-	                    <input type="text" id="category" placeholder="Categoria" class="form-control"/>
-	                </div>
-	 
-	                <div class="form-group">
-	                    <label for="email">Correo electronico</label>
-	                    <input type="text" id="email" placeholder="Correo electronico" class="form-control"/>
+						<label for="direccion">Categoria</label>
+						<select class="selectpicker form-control">
+							@foreach($articles as $article)
+  							<option><td>{{$article->category->name}}</td></option>
+							@endforeach
+						</select>
 					</div>
+					
+					<div class="form-group">
+						<label for="direccion">Categoria</label>
+						<select class="selectpicker form-control">
+							
+  							<option value="1"><td>Cultura</td></option>
+							
+						</select>
+	                </div>
 					
 					<div class="form-group">
 						<strong>Details:</strong>
