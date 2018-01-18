@@ -45,7 +45,7 @@ class PostController extends Controller
         {
             
            $post = Post::create($request->all());
-           return response($post);
+           return response($request->all());
         }
         
     }

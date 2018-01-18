@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use app\Category;
+use App\Category;
+use App\Post;
 
 class HomeController extends Controller
 {
@@ -27,5 +28,11 @@ class HomeController extends Controller
         
 
         return view('home');
+    }
+
+    public function getArticle($category, $articleslug)
+    {
+        $articulo = Post::where('slug',$articleslug)->first();
+        return view('post', compact('articulo'));
     }
 }

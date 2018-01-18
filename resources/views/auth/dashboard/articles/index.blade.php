@@ -137,6 +137,7 @@
 		var data = $(this).serialize();
 		var url = $(this).attr('action');
 		var post = $(this).attr('method');
+		console.log(data.length)
 		$.ajax({
 
 			type : post,
@@ -145,6 +146,7 @@
 			dataType : 'json',
 			success:function(data)
 			{
+				console.log(data)
 				$('#add_new_record_modal').modal('hide');
 
 			}

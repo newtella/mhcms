@@ -12,7 +12,7 @@ class Category extends Model
 
     public function posts()
     {
-        return $this->hasOne(User::class);
+        return $this->hasOne(Post::class);
     }
 }
 

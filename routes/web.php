@@ -13,6 +13,7 @@
 
 use App\Post;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\HomeController;
 
 
 
@@ -21,14 +22,25 @@ Route::get('/', function () {
     $posts = Post::orderby('id', 'DESC')->where('status','DRAFT')->simplePaginate(5);
     return view('welcome', compact('posts'));
 });
+Route::get('{category}/{articleslug}', 'HomeController@getArticle');
+
+
+
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::resource('categories', 'CategoryController');
-Route::resource('rols', 'RolController');
-Route::resource('articles', 'PostController');
+// en las siguientes rutas si no esta logeado mandar a login
+Route::group(['middleware' => ['auth']], function() {
+   
+    Route::resource('categories', 'CategoryController');
+    Route::resource('rols', 'RolController');
+    Route::resource('articles', 'PostController');
+    Route::get('summernote', 'FileController@getSummernote');
+    Route::post('summernote', 'FileController@postSummernote')->name('summernote.post');
+    Route::get('/home', 'HomeController@index')->name('home');
+});
 
-Route::get('summernote', 'FileController@getSummernote');
-Route::post('summernote', 'FileController@postSummernote')->name('summernote.post');
+
+
+
 

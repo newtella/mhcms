@@ -153,7 +153,7 @@
       @foreach($posts as $post)
       <div class="panel panel-default">
         <div class="panel-heading">
-          {{$post->name}}
+          <a href="{{$post->category->slug}}/{{$post->slug}}">{{$post->name}}</a>
         </div>
   
   <div class="panel-body">
@@ -166,7 +166,7 @@
     </div>
     @endif
     {{$post->excerpt}}
-    <a href="#">Leer Mas</a>
+    <a href="{{$post->category->slug}}/{{$post->slug}}">Leer Mas</a>
     </div>
     </div>
     @endforeach
