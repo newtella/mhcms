@@ -125,7 +125,8 @@
 
     <!-- <script src="{{ asset('js/summernote.min.js') }}"></script> -->
 
-    
+    @yield('script')
+
     
     
    

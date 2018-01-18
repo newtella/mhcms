@@ -16,7 +16,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $articles = Post::with('user','category')->paginate(5);
+        $articles = Post::with('user','category')->orderBy('id','DESC')->paginate(5);
         return view('auth.dashboard.articles.index', compact('articles'));
 
         
@@ -41,7 +41,13 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if($request->ajax())
+        {
+            
+           $post = Post::create($request->all());
+           return response($post);
+        }
+        
     }
 
     /**

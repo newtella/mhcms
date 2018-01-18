@@ -33,7 +33,7 @@
 	<!-- /Content Section -->
 <!-- Bootstrap Modals -->
 	<!-- Modal - Agregar nuevo registro -->
-		
+	
 	<div class="modal fade" id="add_new_record_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
 	    <div class="modal-dialog" role="document">
 	        <div class="modal-content">
@@ -42,44 +42,38 @@
 	                <h4 class="modal-title" id="myModalLabel">Agregar registro</h4>
 	            </div>
 	            <div class="modal-body">
-	 
+	 				<form id="frm_new_post" action="{{route('articles.store')}}" method="POST" id="frm-insert">
+
 	                <div class="form-group">
-	                    <label for="nombre">Titulo</label>
-	                    <input type="text" id="title" placeholder="Titulo" class="form-control"/>
+	                    <label for="titulo">Titulo</label>
+	                    <input name="name" type="text" id="titulo" placeholder="Titulo" class="form-control"/>
 	                </div>
 	 
 	                <div class="form-group">
-	                    <label for="apellidos">Slug</label>
-	                    <input disabled type="text" id="slug" placeholder="Slug" class="form-control"/>
+	                    <label for="slug">Slug</label>
+	                    <input name="slug" type="text" id="slug"  placeholder="Slug" class="form-control"/>
 	                </div>
 
 	                <div class="form-group">
-						<label for="direccion">Categoria</label>
-						<select class="selectpicker form-control">
+						<label for="categoria">Categoria</label>
+						<select name="category_id" id="categoria" class="selectpicker form-control">
 							@foreach($articles as $article)
   							<option value="{{$article->category->id}}"><td>{{$article->category->name}}</td></option>
 							@endforeach
 						</select>
 					</div>
 					
-					<div class="form-group">
-						<label for="direccion">Categoria</label>
-						<select class="selectpicker form-control">
-							
-  							<option value="1"><td>Cultura</td></option>
-							
-						</select>
-	                </div>
+					<input name="user_id" type="hidden" value="{{ Auth::user()->id}}" />
 					
 					<div class="form-group">
 						<strong>Details:</strong>
-						<textarea id="summernote" class="form-control" name="detail"></textarea>
+						<textarea id="summernote" class="form-control" name="body"></textarea>
 					</div>
-	
-	            </div>
-	            <div class="modal-footer">
+					<div class="modal-footer">
 	                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-	                <button type="button" class="btn btn-primary" onclick="addRecord()">Guardar</button>
+					<input type="submit" class="btn btn-primary" value="Guardar" /> 
+					</div>
+					</form>
 	            </div>
 	        </div>
 	    </div>
@@ -126,4 +120,42 @@
 	    </div>
 	</div>
 	<!-- // Modal actualizar registro -->
+	@endsection
+
+	@section('script')
+
+	<script type="text/javascript">
+
+	$.ajaxSetup({
+		headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		}
+	});
+
+	$('#frm_new_post').on('submit', function(e){
+		e.preventDefault();
+		var data = $(this).serialize();
+		var url = $(this).attr('action');
+		var post = $(this).attr('method');
+		$.ajax({
+
+			type : post,
+			url : url,
+			data : data,
+			dataType : 'json',
+			success:function(data)
+			{
+				$('#add_new_record_modal').modal('hide');
+
+			}
+		})
+
+		
+		
+
+	});
+	
+
+	</script>
+
 	@endsection

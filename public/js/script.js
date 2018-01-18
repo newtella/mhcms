@@ -7,9 +7,9 @@ console.log("gggg");
 
    });
 
-   $('#title').on('keypress', function(){
+   $('#titulo').on('change', function(){
         
-    var title = $('#title').val();
+    var title = $('#titulo').val();
     title = title.toLowerCase();
     var slug = replaceAll(title,' ','-');
  
@@ -55,32 +55,32 @@ function readRecords(modelo) {
 
 
 function addPost() {
-    // var url = "ajax/user/Crear.php";
+     var url = "/articles";
     // var arrayUrl = url.split('/');  
 
-    var titulo = $("#title").val();
-    titulo = titulo.trim();
+    var titulo = $("#titulo").val();
+   // titulo = titulo.trim();
     var slug = $("#slug").val();
-    slug = slug.trim();
-    var categoria = $("#category").val();
-    categoria = categoria.trim();
+   // slug = slug.trim();
+    var categoria = $("#categoria").val();
+   // categoria = categoria.trim();
     var tag = $("#tag").val();
-    tag = tag.trim();
-    var mensaje = $("#body").val();
+   // tag = tag.trim();
     
  
     if (titulo == "") {
         alert("El campo nombre es requerido!");
     }
     else if (slug == "") {
-        alert("El campo apellidos es requerido!");
+        alert("El campo slug es requerido!");
     }
     else if (categoria == "") {
-        alert("El campo apellidos es requerido!");
+        alert("El campo categoria es requerido!");
     }
     else if (tag == "") {
-        alert("El campo correo electronico es requerido!");
+        alert("El campo tag es requerido!");
     }
+    
     
     else {
         // Agregar registro
@@ -89,12 +89,12 @@ function addPost() {
             slug: slug,
             categoria: categoria,
             tag: tag
-        }, function (data, status) {
+        }, function () {
             // cerramos el formulario modal
             $("#add_new_record_modal").modal("hide");
  
             // volvemos a leer los registros
-            readRecords(arrayUrl[1]);
+            //readRecords(arrayUrl[0]);
 
             // limpiamos los campos del formulario modal
             $("#title").val("");
