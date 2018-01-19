@@ -21,7 +21,7 @@ class RolController extends Controller
 
     public function index()
     {
-        $roles = Rol::paginate(5);
+        $roles = Rol::orderby('id','DESC')->paginate(5);
         return view('auth.dashboard.rols.index', compact('roles'));
 
     }
@@ -44,7 +44,12 @@ class RolController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if($request->ajax())
+        {
+            
+           $rol = Rol::create($request->all());
+           return response($request->all());
+        }
     }
 
     /**
