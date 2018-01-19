@@ -1,23 +1,31 @@
 @extends('layouts.admin.app')
 @section('content')
 <h3>Roles</h3>
-			<button data-toggle="modal" data-target="#add_new_rol_modal" class="btn btn-success pull-right"><i class="fas fa-plus"></i> Nuevo Registro</button>
-			
-				<table class="table table-stripped table-bordered table-responsive">
+	<button data-toggle="modal" data-target="#add_new_rol_modal" class="btn btn-success pull-right">
+		<i class="fas fa-plus"></i> Nuevo Registro
+		</button>
+				
+			<table class="table table-stripped table-bordered table-responsive">
 					<tr>
 						<th class="text-center">No.</th>
 						<th class="text-center">Descripcion</th>
 						<th class="text-center">Acciones</th>
 					</tr>
-					@foreach($roles as $rol)
+				@foreach($roles as $rol)
 					<tr>
 						<td class="text-center">{{$rol->id}}</td>
 						<td>{{$rol->name}}</td>
-						<td width="172px"><a class="btn btn-sm btn-warning"href=""><i class="fas fa-edit"></i> Editar</a> <a class="btn btn-sm btn-danger" href=""><i class="fas fa-trash"></i> Eliminar</a></td>
+						<td width="172px"><a class="btn btn-sm btn-warning"href="">
+							<i class="fas fa-edit"></i> Editar</a> 
+							<a class="btn btn-sm btn-danger" href="">
+							<i class="fas fa-trash"></i> Eliminar</a>
+						</td>
 					</tr>
-					@endforeach
-				</table>
-				<div class="text-right">{{$roles->render()}}</div>
+				@endforeach
+			</table>
+				<div class="text-right">
+					{{$roles->render()}}
+				</div>
 
 				
 	<!-- /Content Section -->
@@ -89,44 +97,37 @@
 	    </div>
 	</div> -->
 	<!-- // Modal actualizar registro -->
-	@endsection
+@endsection
 
-	@section('script')
-
+@section('script')
 	<script type="text/javascript">
-
-	$.ajaxSetup({
-		headers: {
-			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-		}
-	});
-
-	$('#frm_new_post').on('submit', function(e){
-		e.preventDefault();
-		var data = $(this).serialize();
-		var url = $(this).attr('action');
-		var post = $(this).attr('method');
-		console.log(data.length)
-		$.ajax({
-
-			type : post,
-			url : url,
-			data : data,
-			dataType : 'json',
-			success:function(data)
-			{
-				console.log(data)
-				$('#add_new_rol_modal').modal('hide');
-
+		$.ajaxSetup({
+			headers: {
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 			}
-		})
+		});
 
-		
-		
+		$('#frm_new_post').on('submit', function(e){
+			e.preventDefault();
+			var data	 = $(this).serialize();
+			var url		 = $(this).attr('action');
+			var post	 = $(this).attr('method');
+				
+			console.log(data.length)
+			
+			$.ajax({
 
-	});
-	
+				type 	: post,
+				url 	: url,
+				data 	: data,
+				dataType: 'json',
+				success:function(data)
+				{
+					console.log(data)
+						$('#add_new_rol_modal').modal('hide');
 
+				}
+			})
+		});
 	</script>
-
-	@endsection
+@endsection

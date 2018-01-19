@@ -20,9 +20,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::paginate(5);
+        $categories = Category::orderby('id','DESC')->paginate(5);
         return view('auth.dashboard.categories.index', compact('categories'));
-     
 
     }
 
@@ -47,7 +46,12 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if($request->ajax())
+        {
+            
+           $category = Category::create($request->all());
+           return response($request->all());
+        }
     }
 
     /**
