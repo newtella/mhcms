@@ -32,7 +32,10 @@ class HomeController extends Controller
 
     public function getArticle($category, $articleslug)
     {
+        
         $articulo = Post::where('slug',$articleslug)->first();
-        return view('post', compact('articulo'));
+        $similarpost = Category::where('slug', $category)->first()->posts->take(5)->get();    
+        return view('post', compact('articulo','similarpost'));
+
     }
 }

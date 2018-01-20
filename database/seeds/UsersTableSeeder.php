@@ -11,7 +11,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\User::class, 15)->create();
+        factory(App\User::class, 2)->create();
 
         //Usuario para ingresar a panel de admon
         

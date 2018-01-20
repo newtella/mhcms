@@ -141,9 +141,10 @@
 					dataType: 'json',
 					success:function(data)
 					{
-				
+						location.reload();
 						console.log(data)
 						$('#add_new_category_modal').modal('hide');
+						
 
 					}
 				})

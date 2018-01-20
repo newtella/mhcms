@@ -17,9 +17,8 @@ class PostController extends Controller
     public function index()
     {
         $articles = Post::with('user','category')->orderBy('id','DESC')->paginate(5);
-        return view('auth.dashboard.articles.index', compact('articles'));
-
-        
+        $categories = Category::orderBy('id','DESC')->get();
+        return view('auth.dashboard.articles.index', compact('articles','categories'));
 
     }
 

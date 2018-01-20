@@ -50,7 +50,7 @@ class CategoryController extends Controller
         {
             
            $category = Category::create($request->all());
-           return response($request->all());
+           return response($category->all());
         }
     }
 
