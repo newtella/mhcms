@@ -14,6 +14,7 @@
 use App\Post;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CategoryController;
 
 
 
@@ -27,12 +28,15 @@ Route::get('{category}/{articleslug}', 'HomeController@getArticle');
 
 
 
+
 Auth::routes();
 
 // en las siguientes rutas si no esta logeado mandar a login
 Route::group(['middleware' => ['auth']], function() {
    
     Route::resource('categories', 'CategoryController');
+    Route::get('get-categories','CategoryController@getCategories');
+    Route::get('categories/destroy/{id}', 'CategoryController@destroy');
     Route::resource('rols', 'RolController');
     Route::resource('articles', 'PostController');
     Route::get('summernote', 'FileController@getSummernote');

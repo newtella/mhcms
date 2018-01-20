@@ -1,34 +1,31 @@
 @extends('layouts.admin.app')
 @section('content')
 <h3>Categorias</h3>
+
+	@if (session('status'))
+		<div class="alert alert-success">
+			{{ session('status') }}
+		</div>
+	@endif
 			<button data-toggle="modal" data-target="#add_new_category_modal" class="btn btn-success pull-right">
 				<i class="fas fa-plus"></i> Nuevo Registro</button>
 			
 				<table class="table table-stripped table-bordered table-responsive">
-					<tr >
-						<th class="text-center">No.</th>
-						<th class="text-center">Name</th>
-						<th class="text-center">Slug</th>
-						<th class="text-center">Descripcion</th>
-					</tr>
-					@foreach($categories as $category)
-						<tr>
-							<td>{{$category->id}}</td>
-							<td>{{$category->name}}</td>
-							<td>{{$category->slug}}</td>
-							<td>{!!$category->body!!}</td>
-							<td width="172px">
-								<a class="btn btn-sm btn-warning"href="">
-								<i class="fas fa-edit"></i> Editar</a> 
-								<a class="btn btn-sm btn-danger" href="">
-								<i class="fas fa-trash"></i> Eliminar</a>
-							</td>
+					<thead>
+						<tr >
+							<th class="text-center">No.</th>
+							<th class="text-center">Name</th>
+							<th class="text-center">Slug</th>
+							<th class="text-center">Descripcion</th>
+							<th class="text-center">Acciones</th>
 						</tr>
-					@endforeach
+					</thead> 
+					<tbody id="tbl-categories">
+						
+					</tbody>
+					
 				</table>
-				<div class="text-right">
-					{{$categories->render()}}
-				</div>
+				<div class="text-right"></div>
 
 				
 	<!-- /Content Section -->
@@ -120,6 +117,33 @@
 
 		<script type="text/javascript">
 
+			$(document).ready(function(){
+				getCategories();
+			});
+
+			function getCategories(){
+				$.get('get-categories', function(data){
+					$.each(data,	function(i, value){
+						var fila = $('<tr />');
+						fila.append($('<td />', {
+							text : value.id
+						})).append($('<td />', {
+							text : value.name
+						})).append($('<td />', {
+							text : value.slug
+						})).append($('<td />', {
+							text : value.body
+						})).append($('<td />', {
+							html : '<a class="btn btn-sm btn-warning" href="">' +
+									'<i class="fas fa-edit"></i> Editar</a>' +
+									' <a  class="btn btn-sm btn-danger" href="categories/destroy/' + value.id + '" onclick="return confirm(\'¿ Desea eliminar la categoria?\')">' +
+									'<i class="fas fa-trash"></i> Eliminar</a>'
+						}).css('width','172px'));
+						$("#tbl-categories").append(fila);
+					});
+				});
+			}
+
 			$.ajaxSetup({
 				headers: {
 					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -141,10 +165,7 @@
 					dataType: 'json',
 					success:function(data)
 					{
-				
-						console.log(data)
 						$('#add_new_category_modal').modal('hide');
-
 					}
 				})
 
