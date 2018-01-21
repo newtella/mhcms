@@ -8,10 +8,7 @@ use Illuminate\Http\Request;
 class CategoryController extends Controller
 {
     
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+   
 
     /**
      * Display a listing of the resource.
@@ -25,6 +22,12 @@ class CategoryController extends Controller
 
     }
 
+    public function getCategories()
+    {
+        $categories = Category::orderby('id','DESC')->get();
+        return $categories;
+
+    }
 
     
 
@@ -94,8 +97,12 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy(Request $request)
     {
-        //
+        if ($request->ajax())
+        {   
+            Category::destroy($request->id);
+            return redirect('categories')->with('status', 'Categoria eliminada exitosamente');
+        }
     }
 }

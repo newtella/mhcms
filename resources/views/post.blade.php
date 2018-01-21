@@ -13,6 +13,10 @@
                 {!!$articulo->body!!}
                 </div>
             </div>
+<<<<<<< HEAD
+  </div>
+
+=======
     </div>
 
 <div class="container">
@@ -35,6 +39,7 @@
             </div>
         </div>
     @endforeach
+>>>>>>> 959c2089d9fa4c0376633572d99ae3cee3fa35d0
 </div>
 </div>
 
