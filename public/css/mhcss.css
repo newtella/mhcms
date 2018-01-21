@@ -22,3 +22,29 @@
     margin-bottom: 7px;
     
 }
+
+.cinzelfont {
+    font-family: 'Cinzel Decorative', cursive;
+}
+
+.rbarresize {
+  display: block;
+  max-width: 100%;  
+  height: auto;
+  
+}
+
+.backgslide {
+    background: linear-gradient(#0f3db3, #f2f2f2);
+}
+.backgbody {
+    background: linear-gradient(#0c5e91, #b4e4fe);
+}
+
+.whitefont {
+    color: aliceblue;
+}
+
+.bluebg {
+    background: rgb(23, 61, 143);
+}

@@ -18,7 +18,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-inverse navbar-static-top">
+        <nav class="navbar navbar-inverse bluebg navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
                     <div class="navbar-collapse collapse">
@@ -75,7 +75,9 @@
                                                      document.getElementById('logout-form').submit();">
                                             Logout
                                         </a>
-
+                                        <a href="{{ url('/home') }}">
+                                            Dashboard
+                                        </a>
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
                                         </form>

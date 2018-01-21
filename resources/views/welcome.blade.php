@@ -9,119 +9,25 @@
         <title>Municipalidad de Huite</title>
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Cinzel+Decorative" rel="stylesheet">
     </head>
   <body>
-        <div class="container">
-          <div class="jumbotron">
-          </div>
-        </div>
-          <div class="container">
-            <div class="row">
-              <div class="col-md-4"> 
-                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                  <!-- Indicators -->
-                  <ol class="carousel-indicators">
-                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                  </ol>
-                  <!-- Wrapper for slides -->
-                  <div class="carousel-inner" role="listbox">
-                    <div class="item active">
-                      <img src="http://petlosshousecalls.com/wp-content/uploads/2014/01/pet-loss-house-calls-brown-black-small-dog-large.jpg" alt="...">
-                        <div class="carousel-caption">
-                          Perro
-                        </div>
-                    </div>
-                      <div class="item">
-                        <img src="https://www.wellnesspetfood.com/sites/default/files/styles/blog_feature/public/media/images/happy-cat-blog-cover.jpg?itok=kJhdXlkP" alt="...">
-                          <div class="carousel-caption">
-                            Gato
-                          </div>
-                      </div>
-                  </div>
-                <!-- Controls -->
-                    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-                      <span class="icon-prev" aria-hidden="true"></span>
-                      <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-                      <span class="icon-next" aria-hidden="true"></span>
-                      <span class="sr-only">Next</span>
-            
-                    </a>
-              </div>
-            </div>
-              <div class="col-md-4"> 
-                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                  <!-- Indicators -->
-                  <ol class="carousel-indicators">
-                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                  </ol>
-                  <!-- Wrapper for slides -->
-                  <div class="carousel-inner" role="listbox">
-                    <div class="item active">
-                      <img src="http://petlosshousecalls.com/wp-content/uploads/2014/01/pet-loss-house-calls-brown-black-small-dog-large.jpg" alt="...">
-                        <div class="carousel-caption">
-                          Perro
-                        </div>
-                    </div>
-                      <div class="item">
-                        <img src="https://www.wellnesspetfood.com/sites/default/files/styles/blog_feature/public/media/images/happy-cat-blog-cover.jpg?itok=kJhdXlkP" alt="...">
-                          <div class="carousel-caption">
-                            Gato
-                          </div>
-                      </div>
-                  </div>
-                    <!-- Controls -->
-                    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-                      <span class="icon-prev" aria-hidden="true"></span>
-                      <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-                      <span class="icon-next" aria-hidden="true"></span>
-                      <span class="sr-only">Next</span>
-                    </a>
-                </div>
-              </div>
-                <div class="col-md-4"> 
-                  <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                    <!-- Indicators -->
-                    <ol class="carousel-indicators">
-                      <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                      <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                    </ol>
-                    <!-- Wrapper for slides -->
-                    <div class="carousel-inner" role="listbox">
-                      <div class="item active">
-                        <img src="http://petlosshousecalls.com/wp-content/uploads/2014/01/pet-loss-house-calls-brown-black-small-dog-large.jpg" alt="...">
-                          <div class="carousel-caption">
-                            Perro
-                          </div>
-                      </div>
-                        <div class="item">
-                          <img src="https://www.wellnesspetfood.com/sites/default/files/styles/blog_feature/public/media/images/happy-cat-blog-cover.jpg?itok=kJhdXlkP" alt="...">
-                            <div class="carousel-caption">
-                              Gato
-                            </div>
-                        </div>
-                    </div>
-                      <!-- Controls -->
-                      <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-                        <span class="icon-prev" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                      </a>
-                      <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-                        <span class="icon-next" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                      </a>
-                </div>
-          </div>
-      </div>  
-    </div>
+   
     <div class="container">
-      <div class="col-md-8">
-        <h2>Lista de Articulos</h2>
+      <a href="#">
+        <img class="rbarresize" src="http://www.travelntime.in/images/guatemala-banner.jpg" alt="...">
+      </a>
+    </div>
+        
+      
+<!-- relevant content slides view: rslides.blade.php -->
+    @include('rslides') 
+<!-- relevant content slides end -->
+
+  <div class="container">
+    <div class="panel panel-body backgbody">
+      <h2 class="cinzelfont whitefont">Ultimas Publicaciones</h2>
+      <div class="col-md-9 ">
           @foreach($posts as $post)
             <div class="panel panel-default">
               <div class="panel-heading">
@@ -141,6 +47,25 @@
             </div>
           @endforeach
             {{$posts->render()}}
+      </div>
+      <!-- right Bar 1-->
+    <div class="col-md-3">
+      <div>
+        <div class="row">
+            <a href="#" class="pull-right">
+              <img class="rbarresize" src="https://i.pinimg.com/originals/eb/e6/13/ebe613f67b90a6eeee9afe77d2e224d0.jpg" alt="...">
+            </a>
+        </div>
+      </div>
+<!-- right Bar 2-->
+      <div>
+        <div class="row">
+            <a href="#" class="pull-right">
+              <img class="rbarresize" src="http://mapasdeguatemala.com/mdg/wp-content/uploads/2015/10/portada-Tikal-600.jpg" alt="...">
+            </a>
+        </div>
+      </div>
+      <!-- End right Bar -->
       </div>
     </div>
   </body>
