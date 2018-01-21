@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+Use App\Category;
 
 class ArticleController extends Controller
 {
@@ -20,4 +21,6 @@ class ArticleController extends Controller
      
 
     }
+
+
 }

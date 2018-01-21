@@ -15,7 +15,6 @@
 							<th class="text-center">Acciones</th>
 						</tr>
 					@foreach($articles as $article)
-					
 						<tr>
 							<td>{{$article->id}}</td>
 							<td>{{$article->name}}</td>
@@ -28,13 +27,12 @@
 								<i class="fas fa-trash"></i> Eliminar</a>
 							</td>
 						</tr>
-					
 					@endforeach
 				</table>
 					<div class="text-right">
 						{{$articles->render()}}
 					</div>
-
+					
 				
 	<!-- /Content Section -->
 <!-- Bootstrap Modals -->
@@ -64,9 +62,9 @@
 	               		<div class="form-group">
 							<label for="categoria">Categoria</label>
 							<select name="category_id" id="categoria" class="selectpicker form-control">
-								@foreach($articles as $article)
+								@foreach($categories as $category)
   									<option value="{{$article->category->id}}">
-								  		<td>{{$article->category->name}}</td>
+								  		<td>{{$category->name}}</td>
 									</option>
 								@endforeach
 							</select>
@@ -155,8 +153,9 @@
 				dataType : 'json',
 				success:function(data)
 					{
-						console.log(data)
+						location.reload();
 						$('#add_new_record_modal').modal('hide');
+						
 					}
 			})
 
