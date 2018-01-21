@@ -134,9 +134,9 @@
 						})).append($('<td />', {
 							text : value.body
 						})).append($('<td />', {
-							html : '<a class="btn btn-sm btn-warning" href="">' +
+							html : '<a class="btn btn-sm btn-warning" href="" id="edit" data-id=' + value.id + ' >' +
 									'<i class="fas fa-edit"></i> Editar</a>' +
-									' <a  class="btn btn-sm btn-danger" href="categories/destroy/' + value.id + '" onclick="return confirm(\'¿ Desea eliminar la categoria?\')">' +
+									' <a  class="btn btn-sm btn-danger" href="" id="del" data-id=' + value.id + ' onclick="return confirm(\'¿ Desea eliminar la categoria?\')">' +
 									'<i class="fas fa-trash"></i> Eliminar</a>'
 						}).css('width','172px'));
 						$("#tbl-categories").append(fila);
@@ -144,6 +144,16 @@
 				});
 			}
 
+			//-------------Eliminar categorias-------------
+
+			$('body').delegate('#tbl-categories #del', 'click', function(e){
+				var id = $(this).data('id');
+				$.post('{{ URL::to("categories/destroy") }}', {id:id}, function(data){
+					$(+id).remove();
+				});
+			});
+
+			
 			$.ajaxSetup({
 				headers: {
 					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
