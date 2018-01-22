@@ -175,15 +175,11 @@
 					dataType: 'json',
 					success:function(data)
 					{
-<<<<<<< HEAD
-						$('#add_new_category_modal').modal('hide');
-=======
 						location.reload();
 						console.log(data)
 						$('#add_new_category_modal').modal('hide');
 						
 
->>>>>>> 959c2089d9fa4c0376633572d99ae3cee3fa35d0
 					}
 				})
 

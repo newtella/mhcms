@@ -12,6 +12,7 @@ storage/*.key
 .env
 Homestead.yaml
 Homestead.json
+resources/lang/es
 
 
 # Rocketeer PHP task runner and deployment package. https://github.com/rocketeers/rocketeer
