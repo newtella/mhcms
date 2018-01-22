@@ -205,18 +205,9 @@
 					data 	: data,
 					dataType: 'json',
 					success:function(data)
-<<<<<<< HEAD
 					{ 
-=======
-					{
->>>>>>> 004763921510dbc1e184cd7af4bd8520037a8125
 						location.reload();
 						$('#add_new_category_modal').modal('hide');
-<<<<<<< HEAD
-=======
-						
-
->>>>>>> 004763921510dbc1e184cd7af4bd8520037a8125
 					}
 					});
 				});
