@@ -36,7 +36,10 @@ Route::group(['middleware' => ['auth']], function() {
    
     Route::resource('categories', 'CategoryController');
     Route::get('get-categories','CategoryController@getCategories');
-    Route::post('categories/destroy/{id}', 'CategoryController@destroy');
+    Route::post('categories', 'CategoryController@store');    
+    Route::post('categories/{category}', 'CategoryController@update');
+    Route::get('categories/{category}/edit', 'CategoryController@edit');
+    Route::post('categories/{category}', 'CategoryController@destroy');
     Route::resource('rols', 'RolController');
     Route::resource('articles', 'PostController');
     Route::get('summernote', 'FileController@getSummernote');

@@ -52,10 +52,12 @@ class CategoryController extends Controller
         if($request->ajax())
         {
             
-           $category = Category::create($request->all());
-           return response($category->all());
+            $categories = Category::create($request->all());
+            return $categories;
+            
         }
     }
+ 
 
     /**
      * Display the specified resource.
@@ -74,9 +76,15 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit(Request $request)
     {
-        //
+        if($request->ajax())
+        {
+            
+            $categories = Category::find($request->id);
+            return response($categories);
+            
+        }
     }
 
     /**
@@ -86,9 +94,16 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request)
     {
-        //
+        if($request->ajax())
+        {
+            
+            $categories = Category::find($request->id);
+            $categories->update($request->all());
+            return response($categories);
+            
+        }
     }
 
     /**

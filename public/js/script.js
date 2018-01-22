@@ -25,7 +25,7 @@ $(document).ready( function(){
     }
 
 
-    // para obtener el slug del nombre de la categoria 
+    // para obtener el slug del nombre de la categoria en el Create
     
     $('#name').on('change', function(){
         
@@ -36,12 +36,22 @@ $(document).ready( function(){
     
         $('#categoryslug').val(slug);
 
-
     });
    
-    function replaceAll(str, find, replace) {
-        return str.replace(new RegExp(find, 'g'), replace);
-    }
+    
+// para obtener el slug del nombre de la categoria en el Update
+    
+$('#update_name').on('change', function(){
+        
+    var title = $('#update_name').val();
+    title = title.toLowerCase();
+    var slug = replaceAll(title,' ','-');
+
+
+    $('#update_categoryslug').val(slug);
+
+});
+
 });
 
 
