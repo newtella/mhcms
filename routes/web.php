@@ -40,6 +40,14 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('categories/{category}', 'CategoryController@update');
     Route::get('categories/{category}/edit', 'CategoryController@edit');
     Route::post('categories/{category}', 'CategoryController@destroy');
+
+    Route::resource('tags', 'TagController');
+    Route::get('get-tags','TagController@getTags');
+    Route::post('tags', 'TagController@store');    
+    Route::post('tags/{tag}', 'TagController@update');
+    Route::get('tags/{tag}/edit', 'TagController@edit');
+    Route::post('tags/{tag}', 'TagController@destroy');
+
     Route::resource('rols', 'RolController');
     Route::resource('articles', 'PostController');
     Route::get('summernote', 'FileController@getSummernote');

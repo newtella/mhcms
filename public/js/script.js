@@ -52,6 +52,35 @@ $('#update_name').on('change', function(){
 
 });
 
+
+// para obtener el slug del nombre de la Etiqueta en el Create
+    
+$('#name_tag').on('change', function(){
+        
+    var title = $('#name_tag').val();
+    title = title.toLowerCase();
+    var slug = replaceAll(title,' ','-');
+
+
+    $('#tagslug').val(slug);
+
+});
+
+
+// para obtener el slug del nombre de la Etiqueta en el Update
+
+$('#update_name_tag').on('change', function(){
+    
+var title = $('#update_name_tag').val();
+title = title.toLowerCase();
+var slug = replaceAll(title,' ','-');
+
+
+$('#update_tagslug').val(slug);
+
+});
+
+
 });
 
 

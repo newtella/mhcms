@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use DB;
 use App\Tag;
 use Illuminate\Http\Request;
 
@@ -14,7 +14,17 @@ class TagController extends Controller
      */
     public function index()
     {
-        //
+       
+        $tags = Tag::orderby('id','DESC')->paginate(5);
+        return view('auth.dashboard.tags.index', compact('tags'));
+
+    }
+
+    public function getTags()
+    {
+        $tags = Tag::orderby('id','DESC')->get();
+        return $tags;
+
     }
 
     /**
@@ -35,7 +45,13 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if($request->ajax())
+        {
+            
+            $tags = Tag::create($request->all());
+            return $tags;
+            
+        }
     }
 
     /**
@@ -55,11 +71,16 @@ class TagController extends Controller
      * @param  \App\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function edit(Tag $tag)
+    public function edit(Request $request)
     {
-        //
+        if($request->ajax())
+        {
+            
+            $tags = Tag::find($request->id);
+            return response($tags);
+            
+        }
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -67,9 +88,16 @@ class TagController extends Controller
      * @param  \App\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tag $tag)
+    public function update(Request $request)
     {
-        //
+        if($request->ajax())
+        {
+            
+            $tags = Tag::find($request->id);
+            $tags->update($request->all());
+            return response($tags);
+            
+        }
     }
 
     /**
@@ -78,8 +106,12 @@ class TagController extends Controller
      * @param  \App\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tag $tag)
+    public function destroy(Request $request)
     {
-        //
+        if ($request->ajax())
+        {   
+            Tag::destroy($request->id);
+            return redirect('tags')->with('status', 'Etiqueta eliminada exitosamente');
+        }
     }
 }
