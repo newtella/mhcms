@@ -14,8 +14,8 @@
 					<thead>
 						<tr >
 							<th class="text-center">No.</th>
-							<th class="text-center">Name</th>
-							<th class="text-center">Slug</th>
+							<th class="text-center">Nombre</th>
+							<th class="text-center">URL Amigable</th>
 							<th class="text-center">Descripcion</th>
 							<th class="text-center">Acciones</th>
 						</tr>
@@ -135,7 +135,7 @@
 						})).append($('<td />', {
 							html : '<a class="btn btn-sm btn-warning" href="" id="edit" data-id=' + value.id + ' >' +
 									'<i class="fas fa-edit"></i> Editar</a>' +
-									' <a  class="btn btn-sm btn-danger" href="" id="del" data-id=' + value.id + ' onclick="return confirm(\'¿ Desea eliminar la categoria?\')">' +
+									' <a  class="btn btn-sm btn-danger" href="" id="del" data-id=' + value.id + ' onclick="Confirm()">' +
 									'<i class="fas fa-trash"></i> Eliminar</a>'
 						}).css('width','172px'));
 						$("#tbl-categories").append(fila);
@@ -145,13 +145,31 @@
 
 			//-------------Eliminar categorias-------------
 
-			$('body').delegate('#tbl-categories #del', 'click', function(e){
-				var id = $(this).data('id');
-				$.post('{{ URL::to("categories/{id}") }}', {id:id}, function(data){
-					$(+id).remove();
-				});
-			});
+				/*se creo esta funcion para que al dar click al boton elminiar muestre un alert con
+				  mensajes para que el usuario de click a la opcion aceptar o cancelar */
+			
+			function Confirm() {				
+				//Ingresamos un mensaje a mostrar
+				var id = confirm("¿Desea eliminar el registro?");
 
+					//Detectamos si el usuario acepto el mensaje
+					if (id) {
+						$('body').delegate('#tbl-categories #del', 'click', function(e){
+							var id = $(this).data('id');
+								$.post('{{ URL::to("categories/{id}") }}', {id:id}, function(data){
+									$(+id).remove();
+										alert("¡Se a eliminado exitosamente!");
+								});
+						});
+					}
+					//Detectamos si el usuario denegó el mensaje
+					else {
+						alert("¡No se realizo ningun cambio !");
+					}
+			}
+
+
+			
 			//-------------Editar categorias-------------
 
 			$('body').delegate('#tbl-categories #edit', 'click', function(e){
