@@ -27,6 +27,18 @@
     font-family: 'Cinzel Decorative', cursive;
 }
 
+.ptsanzfont {
+
+    font-family: 'PT Sans', sans-serif;    
+
+}
+
+.courgettefont {
+
+    font-family: 'Courgette', cursive;
+
+}
+
 .rbarresize {
   display: block;
   max-width: 100%;  

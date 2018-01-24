@@ -10,12 +10,17 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Cinzel+Decorative" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Courgette" rel="stylesheet">
+
+
+
     </head>
   <body>
    
     <div class="container">
       <a href="#">
-        <img class="rbarresize" src="http://www.travelntime.in/images/guatemala-banner.jpg" alt="...">
+        <img class="rbarresize" src="http://www.oneyogaglobal.com/wp-content/uploads/2015/11/Guatemala-banner.jpg" alt="...">
       </a>
     </div>
         
@@ -31,19 +36,29 @@
           @foreach($posts as $post)
             <div class="panel panel-default">
               <div class="panel-heading">
-                <a href="{{$post->category->slug}}/{{$post->slug}}">{{$post->name}}</a>
+                <a style="font-size: 25px; color:saddlebrown;" class="courgettefont" href="{{$post->category->slug}}/{{$post->slug}}">{{$post->name}}</a>
               </div> 
                 <div class="panel-body">
-                  @if($post->imageurl)
-                    <div class="media">
-                      <div class="media-left">
-                        <img width="200px" class="media-object" src="{{$post->imageurl}}" class="img-responsive" alt="">
-                      </div>
-                    </div>
-                  @endif
+                  <div class="contaniner">
+                    <div class="col-md-6">
                     {{$post->excerpt}}
-                        <a href="{{$post->category->slug}}/{{$post->slug}}">Leer Mas</a>
+                    </div>
+                    <div class="col-md-6">
+                      @if($post->imageurl)
+                        <div>
+                          <div>
+                            <img width="300px" class="pull-right" src="{{$post->imageurl}}" class="img-responsive" alt="">
+                          </div>
+                        </div>
+                      @endif
+                    </div>
+                  </div>
                 </div>
+                <div class="panel-body">
+                <a class=" btn btn-primary pull-right" href="{{$post->category->slug}}/{{$post->slug}}">Leer Mas</a>
+                </div>
+                  
+                  
             </div>
           @endforeach
             {{$posts->render()}}
