@@ -49,6 +49,12 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('tags/{tag}', 'TagController@destroy');
 
     Route::resource('rols', 'RolController');
+    Route::get('get-rols','RolController@getRols');
+    Route::post('rols', 'RolController@store');    
+    Route::post('rols/{rol}', 'RolController@update');
+    Route::get('rols/{rol}/edit', 'RolController@edit');
+    Route::post('rols/{rol}', 'RolController@destroy');
+
     Route::resource('articles', 'PostController');
     Route::get('summernote', 'FileController@getSummernote');
     Route::post('summernote', 'FileController@postSummernote')->name('summernote.post');

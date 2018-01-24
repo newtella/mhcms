@@ -26,6 +26,15 @@ class RolController extends Controller
 
     }
 
+
+
+    public function getRols()
+    {
+        $rols = Rol::orderby('id','DESC')->get();
+        return $rols;
+
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -47,9 +56,10 @@ class RolController extends Controller
         if($request->ajax())
         {
             
-           $rol = Rol::create($request->all());
-           return response($request->all());
-        }
+            $rols = Rol::create($request->all());
+            return $rols;
+            
+        }      
     }
 
     /**
@@ -69,9 +79,15 @@ class RolController extends Controller
      * @param  \App\Rol  $rol
      * @return \Illuminate\Http\Response
      */
-    public function edit(Rol $rol)
+    public function edit(Request $request)
     {
-        //
+        if($request->ajax())
+        {
+            
+            $rols = Rol::find($request->id);
+            return response($rols);
+            
+        }
     }
 
     /**
@@ -81,9 +97,16 @@ class RolController extends Controller
      * @param  \App\Rol  $rol
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Rol $rol)
+    public function update(Request $request)
     {
-        //
+        if($request->ajax())
+        {
+            
+            $rols = Rol::find($request->id);
+            $rols->update($request->all());
+            return response($rols);
+            
+        }
     }
 
     /**
@@ -92,8 +115,13 @@ class RolController extends Controller
      * @param  \App\Rol  $rol
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Rol $rol)
+    public function destroy(Request $request)
     {
-        //
+        if ($request->ajax())
+        {   
+            Rol::destroy($request->id);
+            return redirect('rols')->with('status', 'Rol eliminado exitosamente');
+        }
     }
+    
 }
