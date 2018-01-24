@@ -49,10 +49,13 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('tags/{tag}', 'TagController@destroy');
 
     Route::resource('rols', 'RolController');
-    Route::resource('articles', 'PostController');
     Route::get('summernote', 'FileController@getSummernote');
     Route::post('summernote', 'FileController@postSummernote')->name('summernote.post');
     Route::get('/home', 'HomeController@index')->name('home');
+
+    Route::resource('articles', 'PostController');
+    Route::get('article/destroy/{id}', ['as' => 'articles.get.destroy', 'uses' => 'PostController@destroy']);
+
 });
 
 

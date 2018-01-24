@@ -89,8 +89,11 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
-    {
-        //
+    public function destroy(Request $request)
+    {   
+        Post::destroy($request->id);
+        return back();
     }
+
+    
 }

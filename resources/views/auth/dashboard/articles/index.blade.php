@@ -1,5 +1,6 @@
 @extends('layouts.admin.app')
 	@section('content')
+	
 		<h3>Articulos</h3>
 			<button data-toggle="modal" data-target="#add_new_record_modal" class="btn btn-success pull-right">
 				<i class="fas fa-plus"></i> Nuevo Registro
@@ -14,7 +15,21 @@
 							<th class="text-center">Usuario</th>
 							<th class="text-center">Acciones</th>
 						</tr>
-					@foreach($articles as $article)
+						@if($articles == null)
+
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						
+						</tr>
+					
+				</table>	
+
+				@else
+
+				@foreach($articles as $article)
 						<tr>
 							<td>{{$article->id}}</td>
 							<td>{{$article->name}}</td>
@@ -23,20 +38,24 @@
 							<td width="172px">
 								<a class="btn btn-sm btn-warning"href="">
 								<i class="fas fa-edit"></i> Editar</a>
-								<a class="btn btn-sm btn-danger" href="">
+								<a class="btn btn-sm btn-danger" href="{{ route('articles.get.destroy', $article->id) }}">
 								<i class="fas fa-trash"></i> Eliminar</a>
 							</td>
 						</tr>
 					@endforeach
 				</table>
-					<div class="text-right">
+				<div class="text-right">
 						{{$articles->render()}}
 					</div>
+
+@endif
+					
 					
 				
 	<!-- /Content Section -->
 <!-- Bootstrap Modals -->
 	<!-- Modal - Agregar nuevo registro -->
+	
 	
 	<div class="modal fade" id="add_new_record_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
 	    <div class="modal-dialog" role="document">
@@ -58,18 +77,33 @@
 	                    	<label for="slug">Slug</label>
 	                    	<input name="slug" type="text" id="slug"  placeholder="Slug" class="form-control"/>
 	                	</div>
-
+						@if($categories != null)
+   
 	               		<div class="form-group">
 							<label for="categoria">Categoria</label>
 							<select name="category_id" id="categoria" class="selectpicker form-control">
 								@foreach($categories as $category)
-  									<option value="{{$article->category->id}}">
+  									<option value="{{$category->id}}">
 								  		<td>{{$category->name}}</td>
 									</option>
 								@endforeach
 							</select>
 						</div>
-					
+						
+
+						@else
+						<div class="form-group">
+							<label for="categoria">Categoria</label>
+							<select name="category_id" id="categoria" class="selectpicker form-control">
+								
+  									<option value="0">
+								  		<td>no hay categorias</td>
+									</option>
+								
+							</select>
+						</div>
+
+						@endif
 						<input name="user_id" type="hidden" value="{{ Auth::user()->id}}" />
 					
 						<div class="form-group">
@@ -160,5 +194,15 @@
 			})
 
 		});
+
+			//Eliminar Articulo
+
+			$.ajaxSetup({
+			headers: {
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			}
+		});
+
+
 	</script>
 @endsection
