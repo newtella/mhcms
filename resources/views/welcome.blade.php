@@ -34,7 +34,7 @@
       <h2 class="cinzelfont whitefont">Ultimas Publicaciones</h2>
       <div class="col-md-9 ">
           @foreach($posts as $post)
-            <div class="panel panel-default">
+            <div class="panel panel-default shadowedbox">
               <div class="panel-heading">
                 <a style="font-size: 25px; color:saddlebrown;" class="courgettefont" href="{{$post->category->slug}}/{{$post->slug}}">{{$post->name}}</a>
               </div> 

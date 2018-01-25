@@ -19,14 +19,14 @@
 <div class="container">
     <h3>Articulos Relacionados</h3>
         @foreach($similarpost as $similar)
-            <div class="col-md-4"> 
+            <div class="col-md-5"> 
                 <div class="row">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h3>{{str_limit($similar->name, 25)}}</h3>
                         <div class="panel-body">
                             @if($similar->imageurl)
-                                <img width="50px" class="media-object" src="{{$similar->imageurl}}" class="img-responsive" alt="">
+                                <img width="200px" class="media-object" src="{{$similar->imageurl}}" class="img-responsive" alt="">
                             @endif
                             <p>{!! str_limit($similar->excerpt, 40)!!}</p>
                             <p><a href="#" class="btn btn-primary" role="button">Button</a>

@@ -50,13 +50,41 @@
     background: linear-gradient(#0f3db3, #f2f2f2);
 }
 .backgbody {
-    background: linear-gradient(#0c5e91, #b4e4fe);
+    background: linear-gradient(#1a2c68, #265191);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+
 }
 
 .whitefont {
-    color: aliceblue;
+    color: rgb(255, 255, 255);
 }
 
 .bluebg {
-    background: rgb(23, 61, 143);
+    background: linear-gradient(#121d59, #151515);
+    
+    
 }
+
+.imagen {
+    
+    
+
+    
+    background-image:url("http://activerain-store.s3.amazonaws.com/blog_entries/499/5134499/original/Arizona_Scence_sky_cactus.jpg?1510262731");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    
+    
+    
+    
+}
+
+.shadowedbox {
+    box-shadow: 0 4px 8px 0 rgba(46, 46, 45, 0.365), 0 6px 20px 0 rgba(23, 24, 23, 0.712);
+
+}
+
+  

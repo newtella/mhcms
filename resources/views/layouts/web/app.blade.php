@@ -16,7 +16,8 @@
     <link href="{{ asset('css/fontawesome-all.css') }}" rel="stylesheet">
     <link href="{{ asset('css/mhcss.css') }}" rel="stylesheet">
 </head>
-<body>
+<body class="imagen">
+
     <div id="app">
         <nav class="navbar navbar-inverse bluebg navbar-static-top">
             <div class="container">
