@@ -15,9 +15,10 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/fontawesome-all.css') }}" rel="stylesheet">
     <link href="{{ asset('css/mhcss.css') }}" rel="stylesheet">
+    
+
 </head>
 <body class="imagen">
-
     <div id="app">
         <nav class="navbar navbar-inverse bluebg navbar-static-top">
             <div class="container">
@@ -25,10 +26,10 @@
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-right">
                             <!-- Branding Image -->
-                            <a class="navbar-brand" href="{{ url('/') }}">
-                                {{ config('', 'MuniHuite') }}
-                            </a>
-                            <li><a href="#home-sec">Inicio</a></li>
+                            <!-- <a class="navbar-brand" href="{{ url('/') }}">
+                            <img src="{{URL::asset('https://munihuite.gob.gt/wp-content/uploads/2016/08/BannerHuite.png')}}" alt="profile Pic" height="25" width="50">
+                            </a> -->
+                            <li><a name="inicio" href="{{ url('/') }}">Inicio</a></li>
                             <li><a href="#features-sec">Tu Muni</a></li>
                             <li><a href="#advance-sec">Informacion Publica</a></li>
                             <li><a href="#gallery-sec">Solicitud de Informacion</a></li>
@@ -64,7 +65,7 @@
                             
                         @else
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+                                <a  href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
                                 <i class="fas fa-user-circle fa-lg"></i>
                                     {{ Auth::user()->username }} <span class="caret"></span>
                                 </a>
@@ -91,17 +92,39 @@
             </div>
         </nav>
 @yield('content')
+
+
+<div class="navbar navbar-default navbar-fixed-bottom">
+    		<div class="">
+      			<p class="navbar-text pull-left">© 2018 - Municipalidad de Huite, Zacapa, Guatemala.
+           			
+				  </p>
+				  <a class="navbar-text text-danger pull-right" href="#inicio" >MuniHuite.com.gt</a>
+    		</div>
+ 		</div>
+                
+        
+
+
+
+
+
+
+
 </div>
 
     <!-- Scripts -->
     <script src="{{ asset('js/script.js')}}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
+    
 
     <script src="{{ asset('assets/jquery/jquery-1.12.4.min.js') }}"></script>
     
     <script src="{{ asset('assets/dataTables/js/jquery.dataTables.min.js') }}"></script>
 
     <script src="{{ asset('assets/validator/validator.min.js') }}"></script>
+
+    
     
     
    

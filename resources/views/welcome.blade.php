@@ -20,7 +20,7 @@
    
     <div class="container">
       <a href="#">
-        <img class="rbarresize" src="http://www.oneyogaglobal.com/wp-content/uploads/2015/11/Guatemala-banner.jpg" alt="...">
+        <img class="rbarresize" src="https://munihuite.gob.gt/wp-content/uploads/2016/05/BannerHuite.png" alt="...">
       </a>
     </div>
         
@@ -68,7 +68,7 @@
       <div>
         <div class="row">
             <a href="#" class="pull-right">
-              <img class="rbarresize" src="https://i.pinimg.com/originals/eb/e6/13/ebe613f67b90a6eeee9afe77d2e224d0.jpg" alt="...">
+              <img class="rbarresize" src="https://i0.wp.com/munihuite.gob.gt/wp-content/uploads/2018/01/Administracion2016-2020.png?ssl=1" alt="...">
             </a>
         </div>
       </div>
@@ -76,7 +76,7 @@
       <div>
         <div class="row">
             <a href="#" class="pull-right">
-              <img class="rbarresize" src="http://mapasdeguatemala.com/mdg/wp-content/uploads/2015/10/portada-Tikal-600.jpg" alt="...">
+              <img class="rbarresize" src="https://i1.wp.com/muniteculutan.gob.gt/wp-content/uploads/2016/04/Flor-de-la-Feria-1.jpg?w=852&ssl=1" alt="...">
             </a>
         </div>
       </div>
