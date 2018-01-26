@@ -6,6 +6,13 @@ $(document).ready( function(){
         height: 300,
 
     });
+
+    $('#updatesummernote').summernote({
+        
+
+        height: 300,
+
+    });
 // para poder obtener el slug del nombre del post 
 
    $('#titulo').on('change', function(){

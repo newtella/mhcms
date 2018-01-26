@@ -148,7 +148,7 @@
 			   
 				   	<div class="form-group">
 					   <strong>Details:</strong>
-					   <textarea id="update_summernote" class="form-control" name="body"></textarea>
+					   <textarea id="updatesummernote" class="form-control" name="body"></textarea>
 				   	</div>
 	 
 				   	<input name="id" type="hidden" id="update_id"  placeholder="" class=""/>
@@ -246,7 +246,7 @@
 					$('#frm-update').find('#update_titulo').val(data.name)
 					$('#frm-update').find('#update_slug').val(data.slug)
 					$('#frm-update').find('#update_categoria').val(data.category_id)
-					$('#frm-update').find('#summernote').val(data.body)
+					$('#frm-update').find('#updatesummernote').val(data.body)
 					$('#frm-update').find('#update_user_id').val(data.user_id	)
 					$('#frm-update').find('#update_id').val(data.id)
 					$('#update_article_modal').modal('show');
