@@ -50,7 +50,7 @@ class PostController extends Controller
         {
             
            $post = Post::create($request->all());
-           return response($request->all());
+           return $post;
         }
         
     }

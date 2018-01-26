@@ -103,11 +103,19 @@
 	@section('script')
 		<script type="text/javascript">
 
+			$.ajaxSetup({
+				headers: {
+					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				}
+			});
+
 			$(document).ready(function(){
 				getTags();
 			});
 
+
 			function getTags(){
+				$("#tbl-tags").empty();
 				$.get('get-tags', function(data){
 					$.each(data,	function(i, value){
 						var fila = $('<tr />');
@@ -120,7 +128,7 @@
 						})).append($('<td />', {
 							html : '<a class="btn btn-sm btn-warning" href="" id="edit" data-id=' + value.id + ' >' +
 									'<i class="fas fa-edit"></i> Editar</a>' +
-									' <a  class="btn btn-sm btn-danger" href="" id="del" data-id=' + value.id + ' onclick="Confirm()">' +
+									' <a  class="btn btn-sm btn-danger" href="" id="del" data-id=' + value.id + ' onclick="">' +
 									'<i class="fas fa-trash"></i> Eliminar</a>'
 						}).css('width','172px'));
 						$("#tbl-tags").append(fila);
@@ -132,27 +140,32 @@
 				/*se creo esta funcion para que al dar click al boton elminiar muestre un alert con
 				  mensajes para que el usuario de click a la opcion aceptar o cancelar */
 			
-				  function Confirm() {				
-					//Ingresamos un mensaje a mostrar
-					var id = confirm("¿Desea eliminar el registro?");
-	
-						//Detectamos si el usuario acepto el mensaje
-						if (id) {
-							$('body').delegate('#tbl-tags #del', 'click', function(e){
-								var id = $(this).data('id');
-									$.post('{{ URL::to("tags/{id}") }}', {id:id}, function(data){
+			$('body').delegate('#tbl-tags #del', 'click', function(e){
+				e.preventDefault();			
+					swal({
+						title: "Eliminar",
+						text: "¿Realmente desea eliminar la etiqueta?",
+						icon: "warning",
+						buttons: true,
+						dangerMode: true,
+					})
+						.then((willDelete) => {
+						if (willDelete) {
+							var id = $(this).data('id');
+									$.post('{{route("tags.destroy", ' + id + ')}}', {id:id}, function(data){
 										$(+id).remove();
-											alert("¡Se a eliminado exitosamente!");
 									});
-							});
-						}
-						//Detectamos si el usuario denegó el mensaje
-						else {
-							alert("¡No se realizo ningun cambio !");
-						}
-				}
-	
-	
+									getTags()
+									swal("Poof! La etiqueta se eliminó correctamente!", {
+										icon: "success",
+									});
+							} 
+							else{
+								swal("¡Operación cancelada por el usuario!");
+							}
+						});
+			});
+
 			//-------------Editar categorias-------------
 
 			$('body').delegate('#tbl-tags #edit', 'click', function(e){
@@ -169,7 +182,7 @@
 
 			//-------------Actualizar categorias-------------
 
-				$('#frm-update-tag').on('submit', function(e){
+			$('#frm-update-tag').on('submit', function(e){
 				e.preventDefault();
 				var data 	= $(this).serialize();
 				var id 		= $('#update_id_tag').val();
@@ -180,19 +193,15 @@
 					dataType: 'json',
 					success:function(data)
 					{ 
-						location.reload();
 						$('#update_tag_modal').modal('hide');
+						getTags()
 					}
-					});
 				});
+			});
 		
 
 			//-----------Crear Categoria --------
-			$.ajaxSetup({
-				headers: {
-					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-				}
-			});
+		
 
 			$('#frm-insert-tag').on('submit', function(e){
 				e.preventDefault();
@@ -206,11 +215,11 @@
 					dataType: 'json',
 					success:function(data)
 					{ 
-						location.reload();
 						$('#add_new_tag_modal').modal('hide');
+						getTags()
 					}
-					});
 				});
+			});
 			
 	</script>
 @endsection

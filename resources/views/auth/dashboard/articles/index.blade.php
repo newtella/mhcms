@@ -168,11 +168,21 @@
 @section('script')
 	<script type="text/javascript">
 
+	
+			$.ajaxSetup({
+				headers: {
+					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				}
+			});
+
         $(document).ready(function(){
 				getArticles();
 			});
 
+//-----------Mostrar Articulos---------------
+
 			function getArticles(){
+				$("#tbl-articles").empty();
 				$.get('get-articles', function(data){
 					console.log(data);
 					$.each(data, function(i, value){
@@ -188,7 +198,7 @@
 						})).append($('<td />', {
 							html : '<a class="btn btn-sm btn-warning" href="" id="edit" data-id=' + value.id + ' >' +
 									'<i class="fas fa-edit"></i> Editar</a>' +
-									' <a  class="btn btn-sm btn-danger" href="" id="del" data-id=' + value.id + ' onclick="Confirm()">' +
+									' <a  class="btn btn-sm btn-danger" href="" id="del" data-id=' + value.id + ' onclick="">' +
 									'<i class="fas fa-trash"></i> Eliminar</a>'
 						}).css('width','172px'));
 						$("#tbl-articles").append(fila);
@@ -197,11 +207,7 @@
 			}
 
 
-		$.ajaxSetup({
-			headers: {
-				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-			}
-		});
+//------------------Insertar articulos ---------------
 
 		$('#frm-insert').on('submit', function(e){
 			e.preventDefault();
@@ -209,7 +215,6 @@
 			var url 	= $(this).attr('action');
 			var post 	= $(this).attr('method');
 			
-				console.log(data.length)
 			$.ajax({
 
 				type 	 : post,
@@ -218,23 +223,16 @@
 				dataType : 'json',
 				success:function(data)
 					{
-						location.reload();
 						$('#add_new_post_modal').modal('hide');
-						
+						getArticles()
 					}
 			})
 
 		});
 
-			//Eliminar Articulo
+			
 
-			$.ajaxSetup({
-			headers: {
-				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-			}
-		});
-
-
+	
 
 			//-------------Editar Articulo-------------
 
@@ -266,8 +264,8 @@
 					dataType: 'json',
 					success:function(data)
 					{ 
-						location.reload();
 						$('#update_article_modal').modal('hide');
+						getArticles()
 					}
 					});
 				});
@@ -278,24 +276,32 @@
 				/*se creo esta funcion para que al dar click al boton elminiar muestre un alert con
 				  mensajes para que el usuario de click a la opcion aceptar o cancelar */
 			
-			function Confirm() {				
-				//Ingresamos un mensaje a mostrar
-				var id = confirm("¿Desea eliminar el registro?");
-
-					//Detectamos si el usuario acepto el mensaje
-					if (id) {
+			
 						$('body').delegate('#tbl-articles #del', 'click', function(e){
-							var id = $(this).data('id');
-								$.post('{{ URL::to("articles/{id}") }}', {id:id}, function(data){
-									$(+id).remove();
-										alert("¡Se a eliminado exitosamente!");
-								});
+							e.preventDefault();			
+							swal({
+								title: "Eliminar",
+								text: "¿Realmente desea eliminar el articulo?",
+								icon: "warning",
+								buttons: true,
+								dangerMode: true,
+							})
+								.then((willDelete) => {
+								if (willDelete) {
+								var id = $(this).data('id');	
+									$.post('{{route("articles.destroy", ' + id + ')}}', {id:id}, function(data){
+										$(+id).remove();
+									});
+									getArticles()
+									swal("Poof! El articulo se eliminó correctamente!", {
+										icon: "success",
+									});
+							} 
+							else{
+								swal("¡Operación cancelada por el usuario!");
+							}
 						});
-					}
-					//Detectamos si el usuario denegó el mensaje
-					else {
-						alert("¡No se realizo ningun cambio !");
-					}
-			}
+			});
+
 	</script>
 @endsection
