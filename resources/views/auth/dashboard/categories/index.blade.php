@@ -114,13 +114,18 @@
 	@section('script')
 		<script type="text/javascript">
 
-
+			$.ajaxSetup({
+				headers: {
+					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				}
+			});
 
 			$(document).ready(function(){
 				getCategories();
 			});
 
 			function getCategories(){
+				$("#tbl-categories").empty();
 				$.get('get-categories', function(data){
 					$.each(data,	function(i, value){
 						var fila = $('<tr />');
@@ -135,7 +140,7 @@
 						})).append($('<td />', {
 							html : '<a class="btn btn-sm btn-warning" href="" id="edit" data-id=' + value.id + ' >' +
 									'<i class="fas fa-edit"></i> Editar</a>' +
-									' <a  class="btn btn-sm btn-danger" href="" id="del" data-id=' + value.id + ' onclick="Confirm()">' +
+									' <a  class="btn btn-sm btn-danger" href="" id="del" data-id=' + value.id + ' >' +
 									'<i class="fas fa-trash"></i> Eliminar</a>'
 						}).css('width','172px'));
 						$("#tbl-categories").append(fila);
@@ -147,28 +152,34 @@
 
 				/*se creo esta funcion para que al dar click al boton elminiar muestre un alert con
 				  mensajes para que el usuario de click a la opcion aceptar o cancelar */
-			
-			function Confirm() {				
-				//Ingresamos un mensaje a mostrar
-				var id = confirm("¿Desea eliminar el registro?");
+		
 
-					//Detectamos si el usuario acepto el mensaje
-					if (id) {
-						$('body').delegate('#tbl-categories #del', 'click', function(e){
+				$('body').delegate('#tbl-categories #del', 'click', function(e){
+					e.preventDefault();		
+					//var resp = confirm("¿Desea eliminar el registro?");
+
+					swal({
+						title: "Eliminar",
+						text: "¿Realmente desea eliminar la categoria?",
+						icon: "warning",
+						buttons: true,
+						dangerMode: true,
+						})
+						.then((willDelete) => {
+						if (willDelete) {
 							var id = $(this).data('id');
-								$.post('{{ URL::to("categories/{id}") }}', {id:id}, function(data){
-									$(+id).remove();
-										alert("¡Se a eliminado exitosamente!");
-								});
-						});
-					}
-					//Detectamos si el usuario denegó el mensaje
-					else {
-						alert("¡No se realizo ningun cambio !");
-					}
-			}
-
-
+							$.post('{{route("categories.destroy", ' + id + ')}}', {id:id}, function(data){
+								$(+id).remove();
+							});
+							getCategories();
+							swal("Poof! La categoria se eliminó correctamente!", {
+							icon: "success",
+							});
+						} else {
+							swal("¡Operación cancelada por el usuario!");
+						}
+					});
+				});
 			
 			//-------------Editar categorias-------------
 
@@ -197,20 +208,16 @@
 					data 	: data,
 					dataType: 'json',
 					success:function(data)
-					{ 
-						location.reload();
+					{
 						$('#update_category_modal').modal('hide');
+						getCategories();
 					}
 					});
 				});
 		
 
 			//-----------Crear Categoria --------
-			$.ajaxSetup({
-				headers: {
-					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-				}
-			});
+			
 
 			$('#frm-insert').on('submit', function(e){
 				e.preventDefault();
@@ -224,11 +231,19 @@
 					dataType: 'json',
 					success:function(data)
 					{ 
-						location.reload();
 						$('#add_new_category_modal').modal('hide');
+						getCategories();
+						$.toast({
+							heading: 'Information',
+							text: '¡Categoria creada exitosamente!',
+							icon: 'info',
+							position: 'top-right',
+							loader: true,        // Change it to false to disable loader
+							loaderBg: '#9EC600'  // To change the background
+						});
 					}
-					});
 				});
+			});
 			
 	</script>
 @endsection

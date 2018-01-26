@@ -19,6 +19,20 @@ $(document).ready( function(){
 
 
     });
+
+    // para poder obtener el slug del nombre del post al editar
+
+   $('#update_titulo').on('change', function(){
+        
+    var title = $('#update_titulo').val();
+    title = title.toLowerCase();
+    var slug = replaceAll(title,' ','-');
+
+
+    $('#update_slug').val(slug);
+
+
+});
    
     function replaceAll(str, find, replace) {
         return str.replace(new RegExp(find, 'g'), replace);

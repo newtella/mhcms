@@ -22,6 +22,12 @@ class PostController extends Controller
 
     }
 
+    public function getArticles()
+    {
+        $articles   = Post::with('user','category')->orderby('id','DESC')->get();
+        return $articles;
+
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -66,9 +72,13 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit(Request $request)
     {
-        //
+        if ($request->ajax())
+        {
+            $posts = Post::find($request->id);
+            return response ($posts);
+        }
     }
 
     /**
@@ -78,9 +88,14 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request)
     {
-        //
+        if ($request->ajax())
+        {
+            $posts = Post::find($request->id);
+            $posts->update($request->all());
+            return response ($posts);
+        }
     }
 
     /**
@@ -91,8 +106,11 @@ class PostController extends Controller
      */
     public function destroy(Request $request)
     {   
-        Post::destroy($request->id);
-        return back();
+        if ($request->ajax())
+        {   
+            Post::destroy($request->id);
+            return redirect('articles')->with('status', 'Articulo eliminado exitosamente');
+        }
     }
 
     

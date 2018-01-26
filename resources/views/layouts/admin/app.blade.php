@@ -14,6 +14,7 @@
     <link href="{{ asset('css/fontawesome-all.css') }}" rel="stylesheet">
     <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.4/summernote.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+    <link href="{{ asset('css/jquery.toast.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/mhcss.css') }}" rel="stylesheet">
     <!-- <link href="{{ asset('css/summernote.css') }}" rel="stylesheet"> -->
 </head>
@@ -120,6 +121,8 @@
     
     <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.4/summernote.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+    <script src="{{ asset('js/sweetalert.min.js')}}"></script>
+    <script src="{{ asset('js/jquery.toast.min.js')}}"></script>
     <script src="{{ asset('js/script.js')}}"></script>
 
     <!-- <script src="{{ asset('js/summernote.min.js') }}"></script> -->
