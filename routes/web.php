@@ -18,13 +18,16 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\CommentController;
 
 
 Route::get('/', function () {
     $posts = Post::orderby('id', 'DESC')->where('status','DRAFT')->simplePaginate(5);
     return view('welcome', compact('posts'));
 });
-Route::get('{category}/{articleslug}', 'HomeController@getArticle');
+Route::get('{category}/{articleslug}'   , 'HomeController@getArticle');
+Route::get('get-comments'               , 'CommentController@getComments');
+Route::post('comments'                  , 'CommentController@store');    
 
 
 
@@ -62,13 +65,21 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::resource('articles'              , 'PostController');
     Route::get('get-articles'               , 'PostController@getArticles');
+    Route::post('artices'                      , 'PostController@store'); 
     //Route::get('article/destroy/{id}'       , ['as' => 'articles.get.destroy', 'uses' => 'PostController@destroy']);
     Route::post('articles/{article}'        , 'PostController@update');
     Route::get('articles/{article}/edit'    , 'PostController@edit');
     Route::post('articles/{article}'        , 'PostController@destroy');
 
+
+    Route::resource('comments'              , 'CommentController');
+    Route::post('comments'                  , 'CommentController@store');
+    
+    //Route::get('/lista-de-comentarios'      ,'CommentController@index');
+    //Route::get('/alterar-status-comentario/{id}/{status}','CommentController@alterarStatus');
 });
 
+// Route::get('get-comments/{id}'          , 'CommentController@getComments');
 
 
 

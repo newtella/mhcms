@@ -14,6 +14,7 @@
     
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/fontawesome-all.css') }}" rel="stylesheet">
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.4/summernote.css" rel="stylesheet">
     <link href="{{ asset('css/mhcss.css') }}" rel="stylesheet">
     
 
@@ -94,7 +95,7 @@
 @yield('content')
 
 
-<div class="navbar navbar-default navbar-fixed-bottom">
+<!-- <div class="navbar navbar-default navbar-fixed-bottom">
     		<div class="">
       			<p class="navbar-text pull-left">© 2018 - Municipalidad de Huite, Zacapa, Guatemala.
            			
@@ -102,7 +103,7 @@
 				  <a class="navbar-text text-danger pull-right" href="#inicio" >MuniHuite.com.gt</a>
     		</div>
  		</div>
-                
+                 -->
         
 
 
@@ -114,7 +115,6 @@
 </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/script.js')}}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     
 
@@ -123,10 +123,11 @@
     <script src="{{ asset('assets/dataTables/js/jquery.dataTables.min.js') }}"></script>
 
     <script src="{{ asset('assets/validator/validator.min.js') }}"></script>
-
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.4/summernote.js"></script>
+    <script src="{{ asset('js/script.js')}}"></script>
     
     
-    
+    @yield('script')
    
 </body>
 </html>
