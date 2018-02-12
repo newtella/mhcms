@@ -66,6 +66,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('articles/{article}'        , 'PostController@update');
     Route::get('articles/{article}/edit'    , 'PostController@edit');
     Route::post('articles/{article}'        , 'PostController@destroy');
+    Route::post('articles'                  , 'PostController@store');
+    
 
 });
 

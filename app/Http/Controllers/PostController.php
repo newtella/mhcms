@@ -46,12 +46,22 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->ajax())
-        {
-            
-           $post = Post::create($request->all());
-           return $post;
-        }
+
+          
+        $ruta = $request->imageurl->store('public/upload'); // la ruta public/uploads debe existir en la carpeta storage de la estructura de carpetas de laravel
+        $request->image = $ruta;
+        $post = Post::create($request->all());
+
+        return $post;
+
+        // if($request->ajax())
+        // {
+        //     $path = $request->file('imageurl')->storeAs('upload');
+        //     $post = Post::create($request->all());
+           
+        
+        //    return $post;
+        // }
         
     }
 

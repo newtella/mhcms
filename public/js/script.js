@@ -15,9 +15,9 @@ $(document).ready( function(){
     });
 // para poder obtener el slug del nombre del post 
 
-   $('#titulo').on('change', function(){
+   $('#name').on('change', function(){
         
-        var title = $('#titulo').val();
+        var title = $('#name').val();
         title = title.toLowerCase();
         var slug = replaceAll(title,' ','-');
  

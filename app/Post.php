@@ -28,7 +28,7 @@ class Post extends Model
 
     public function comment()
     {
-        return $this->belongsToMany()(Comment::class);
+        return $this->belongsToMany(Comment::class);
     }
 
     

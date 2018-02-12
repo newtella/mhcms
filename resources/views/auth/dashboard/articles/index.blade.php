@@ -43,11 +43,11 @@
 
 			</div>
 			<div class="modal-body">
-				 <form  action="{{ URL::to('articles')}}" method="POST" id="frm-insert">
-
+				 <form  action="" method="POST" id="frm-insert" enctype="multipart/form-data">
+				 <!-- {{ URL::to('articles')}} -->
 	                	<div class="form-group">
-	                    	<label for="titulo">Titulo</label>
-	                    	<input name="name" type="text" id="titulo" placeholder="Titulo" class="form-control"/>
+	                    	<label for="name">Titulo</label>
+	                    	<input name="name" type="text" id="name" placeholder="Titulo" class="form-control"/>
 	               		</div>
 	 
 	                	<div class="form-group">
@@ -58,7 +58,7 @@
 						@if($categories != null)
 							<div class="form-group">
 								<label for="categoria">Categoria</label>
-								<select name="category_id" id="categoria" class="selectpicker form-control">
+								<select name="category_id" id="category_id" class="selectpicker form-control">
 									
 									@foreach($categories as $category)
 										<option value="{{$category->id}}">
@@ -81,8 +81,13 @@
 
 						@endif
 						
-						<input name="user_id" type="hidden" value="{{ Auth::user()->id}}" />
-					
+						<input id="user_id" name="user_id" type="hidden" value="{{ Auth::user()->id}}" />
+
+						<div class="form-group">
+    						<label for="imageurl">File input</label>
+    						<input name="imageurl" type="file" class="form-control" id="imageurl">
+    						
+  						</div>
 						<div class="form-group">
 							<strong>Details:</strong>
 							<textarea id="summernote" class="form-control" name="body"></textarea>
@@ -144,7 +149,7 @@
 						</div>
 
 				   	@endif
-					   <input id="update_user_id" name="user_id" type="hidden" value="{{ Auth::user()->id}}" />
+					   <input id="update_user_id" name="updateuser_id" type="hidden" value="{{ Auth::user()->id}}" />
 			   
 				   	<div class="form-group">
 					   <strong>Details:</strong>
@@ -210,25 +215,88 @@
 //------------------Insertar articulos ---------------
 
 		$('#frm-insert').on('submit', function(e){
+
 			e.preventDefault();
-			var data 	= $(this).serialize();
-			var url 	= $(this).attr('action');
-			var post 	= $(this).attr('method');
+    var _name = $('#name').val();
+	var _slug = $('#slug').val();
+	var _category_id = $('#category_id').val();
+    var _body = $('#summernote').val();
+	var _user_id = $('#user_id').val();
+    var _imageurl = $('#imageurl').prop('files')[0];
+
+
+    var form_data = new FormData();
+    form_data.append('name', _name);
+    form_data.append('category_id', _category_id);
+    form_data.append('slug', _slug);
+	form_data.append('user_id', _user_id);
+	form_data.append('body', _body);
+    form_data.append('image', '');
+    form_data.append('imageurl', _imageurl);
+
+	console.log(form_data.get('imageurl'))
+	
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $.ajax({
+        url: "{{url('articles')}}", // point to server-side PHP script
+        data: form_data,
+        type: 'POST',
+        contentType: 'application/json', // The content type used when sending data to the server.
+        cache: false, // To unable request pages to be cached
+        processData: false,
+        success: function(data) {
+            // aqui haces lo que queras...
+        }
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			// e.preventDefault();
 			
-			$.ajax({
+			// var data 	= new FormData($("#frm-insert")[0]);
+			// var url 	= $(this).attr('action');
+			// var post 	= $(this).attr('method');
+			
+			// console.log(data);
 
-				type 	 : post,
-				url  	 : url,
-				data 	 : data,
-				dataType : 'json',
-				success:function(data)
-					{
-						$('#add_new_post_modal').modal('hide');
-						getArticles()
-					}
-			})
+			// $.ajax({
 
-		});
+			// 	type 	 : post,
+			// 	url  	 : url,
+			// 	data 	 : data,
+				
+			// 	success:function(data)
+			// 		{
+			// 			$('#add_new_article_modal').modal('hide');
+			// 			getArticles()
+						
+						
+
+						
+			// 		}
+			// })
+
+	
 
 			
 
@@ -292,10 +360,13 @@
 									$.post('{{route("articles.destroy", ' + id + ')}}', {id:id}, function(data){
 										$(+id).remove();
 									});
-									getArticles()
+									
 									swal("Poof! El articulo se eliminó correctamente!", {
 										icon: "success",
+										
 									});
+									getArticles() 
+
 							} 
 							else{
 								swal("¡Operación cancelada por el usuario!");
