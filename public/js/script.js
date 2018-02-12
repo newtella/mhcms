@@ -10,14 +10,9 @@ $(document).ready( function(){
 
 // para poder obtener el slug del nombre del post 
 
-<<<<<<< HEAD
    $('#name').on('change', function(){
         
         var title = $('#name').val();
-=======
-   $('#titulo').on('change', function(){
-        var title = $('#titulo').val();
->>>>>>> 7dfeea2e002319063788b539ed48e68e5b8ab789
         title = title.toLowerCase();
         var slug = replaceAll(title,' ','-');
  
