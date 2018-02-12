@@ -90,7 +90,7 @@
                     <div class="marginbottom list-group">
                         <h4 class="text-muted"><i class="fas fa-address-card"></i> Administraci&oacute;n</h4>
                     <a href="{{route('articles.index')}}" class="list-group-item"> <i class="fas fa-newspaper"></i> Articulos</a>
-                    <a href="" class="list-group-item"> <i class="fas fa-comments"></i> Comentarios</a>
+                    <a href="{{route('comments.index')}}" class="list-group-item"> <i class="fas fa-comments"></i> Comentarios</a>
                     <a href="{{route('tags.index')}}" class="list-group-item"> <i class="fas fa-tags"></i> Etiquetas</a>
                     <a href="{{route('categories.index')}}" class="list-group-item"> <i class="fas fa-list"></i> Categorias</a>
                 </div>

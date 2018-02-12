@@ -1,45 +1,40 @@
 $(document).ready( function(){
 
     $('#summernote').summernote({
-        
-
         height: 300,
-
     });
 
     $('#updatesummernote').summernote({
-        
-
         height: 300,
-
     });
+
 // para poder obtener el slug del nombre del post 
 
+<<<<<<< HEAD
    $('#name').on('change', function(){
         
         var title = $('#name').val();
+=======
+   $('#titulo').on('change', function(){
+        var title = $('#titulo').val();
+>>>>>>> 7dfeea2e002319063788b539ed48e68e5b8ab789
         title = title.toLowerCase();
         var slug = replaceAll(title,' ','-');
  
     
         $('#slug').val(slug);
-
-
     });
 
     // para poder obtener el slug del nombre del post al editar
 
-   $('#update_titulo').on('change', function(){
-        
-    var title = $('#update_titulo').val();
-    title = title.toLowerCase();
-    var slug = replaceAll(title,' ','-');
+    $('#update_titulo').on('change', function () {
+        var title = $('#update_titulo').val();
+        title = title.toLowerCase();
+        var slug = replaceAll(title, ' ', '-');
 
 
-    $('#update_slug').val(slug);
-
-
-});
+        $('#update_slug').val(slug);
+    });
    
     function replaceAll(str, find, replace) {
         return str.replace(new RegExp(find, 'g'), replace);

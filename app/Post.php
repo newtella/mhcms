@@ -28,7 +28,11 @@ class Post extends Model
 
     public function comment()
     {
+<<<<<<< HEAD
         return $this->belongsToMany(Comment::class);
+=======
+        return $this->hasMany(Comment::class);
+>>>>>>> 7dfeea2e002319063788b539ed48e68e5b8ab789
     }
 
     

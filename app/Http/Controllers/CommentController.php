@@ -14,9 +14,22 @@ class CommentController extends Controller
      */
     public function index()
     {
-        //
+        $comments = Comment::orderby('id','DESC')->paginate(5);
+        return view('auth.dashboard.comments.index', compact('comments'));
+
     }
 
+    public function getComments(Request $request)
+    {
+        if($request->ajax()){
+            // hacer lo que quieras con $id
+            // hacer lo que quieras con $valor2
+            $comments = Comment::where("post_id", '=', $request->id)->orderby('id','DESC')->get();
+            return response()->json($comments);
+            // return $comments;
+        }
+
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -35,8 +48,16 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if($request->ajax())
+        {
+            
+            $comments = Comment::create($request->all());
+            return $comments;
+            
+        }
     }
+
+  
 
     /**
      * Display the specified resource.
@@ -80,6 +101,10 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        //
+        // if ($request->ajax())
+        {   
+            Comment::destroy($request->id);
+            return redirect('comments')->with('status', 'Comentario eliminado exitosamente');
+        }
     }
 }
