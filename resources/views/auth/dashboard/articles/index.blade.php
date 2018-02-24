@@ -84,7 +84,7 @@
 						<input id="user_id" name="user_id" type="hidden" value="{{ Auth::user()->id}}" />
 
 						<div class="form-group">
-    						<label for="imageurl">File input</label>
+    						<label for="imageurl">Cargar Imagen</label>
     						<input name="imageurl" type="file" class="form-control" id="imageurl">
     						
   						</div>
@@ -189,7 +189,6 @@
 			function getArticles(){
 				$("#tbl-articles").empty();
 				$.get('get-articles', function(data){
-					console.log(data);
 					$.each(data, function(i, value){
 						var fila = $('<tr />');
 						fila.append($('<td />', {
@@ -214,91 +213,79 @@
 
 //------------------Insertar articulos ---------------
 
-		$('#frm-insert').on('submit', function(e){
+$('#frm-insert').on('submit', function(e){
 
-			e.preventDefault();
-    var _name = $('#name').val();
-	var _slug = $('#slug').val();
-	var _category_id = $('#category_id').val();
-    var _body = $('#summernote').val();
-	var _user_id = $('#user_id').val();
-    var _imageurl = $('#imageurl').prop('files')[0];
+	e.preventDefault();
+	  var datos = $(this).serializeArray(); //datos serializados
+      var imagen = new FormData($('#frm-insert')[0]);
 
-
-    var form_data = new FormData();
-    form_data.append('name', _name);
-    form_data.append('category_id', _category_id);
-    form_data.append('slug', _slug);
-	form_data.append('user_id', _user_id);
-	form_data.append('body', _body);
-    form_data.append('image', '');
-    form_data.append('imageurl', _imageurl);
-
-	console.log(form_data.get('imageurl'))
-	
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
+		//agregaremos los datos serializados al objecto imagen
+		$.each(datos,function(key,input){
+			imagen.append(input.name,input.value);
+		});
+		
+  
 
     $.ajax({
         url: "{{url('articles')}}", // point to server-side PHP script
-        data: form_data,
+        data: imagen,
         type: 'POST',
-        contentType: 'application/json', // The content type used when sending data to the server.
+		async: 	true,
+        contentType: false, //'application/json', // The content type used when sending data to the server.
         cache: false, // To unable request pages to be cached
+		dataType: 'json',
         processData: false,
         success: function(data) {
-            // aqui haces lo que queras...
-        }
+			console.log(data);
+			console.log(imagen);
+			
+			{
+				$('#add_new_article_modal').modal('hide');
+				getArticles()
+				$.toast({
+							heading: 'Information',
+							text: 'Post creado exitosamente!',
+							icon: 'info',
+							position: 'top-right',
+							loader: true,        // Change it to false to disable loader
+							loaderBg: '#9EC600'  // To change the background
+						});
+			}
+        },
+		error: function(xr, exception){
+			console.log(xr.responseText);
+		}
     });
 });
 
 
 
+	// var _name = $('#name').val();
+		// var _slug = $('#slug').val();
+		// var _category_id = $('#category_id').val();
+		// var _body = $('#summernote').val();
+		// var _user_id = $('#user_id').val();
+		// var _imageurl = $('#imageurl').prop('files')[0];
 
 
+		// var form_data = new FormData();
+		// form_data.append('name', _name);
+		// form_data.append('category_id', _category_id);
+		// form_data.append('slug', _slug);
+		// form_data.append('user_id', _user_id);
+		// form_data.append('body', _body);
+		// form_data.append('image', '');
+		// form_data.append('imageurl', _imageurl);
+
+		// console.log(form_data.get('imageurl'))
+
+			// $.ajaxSetup({
+			//     headers: {
+			//         'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+			//     }
+			// });
 
 
-
-
-
-
-
-
-
-
-
-
-			// e.preventDefault();
-			
-			// var data 	= new FormData($("#frm-insert")[0]);
-			// var url 	= $(this).attr('action');
-			// var post 	= $(this).attr('method');
-			
-			// console.log(data);
-
-			// $.ajax({
-
-			// 	type 	 : post,
-			// 	url  	 : url,
-			// 	data 	 : data,
-				
-			// 	success:function(data)
-			// 		{
-			// 			$('#add_new_article_modal').modal('hide');
-			// 			getArticles()
-						
-						
-
-						
-			// 		}
-			// })
-
-	
-
-			
 
 	
 
@@ -354,7 +341,7 @@
 								buttons: true,
 								dangerMode: true,
 							})
-								.then((willDelete) => {
+								.then((willDelete) =>{
 								if (willDelete) {
 								var id = $(this).data('id');	
 									$.post('{{route("articles.destroy", ' + id + ')}}', {id:id}, function(data){
