@@ -6,6 +6,7 @@ use App\Post;
 use App\Category;
 use App\User;
 use Illuminate\Http\Request;
+use File;
 
 class PostController extends Controller
 {
@@ -46,24 +47,28 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-
         if($request->ajax())
         {
           
             $post = Post::create($request->all());
+
+            if ($request->hasFile('imageurl')) {
+
+                // $request->file('imageurl')->storeAs('public/upload');
+                // // ensure every image has a different name
+                // $file_name = $request->file('imageurl')->hashName();
+                // // save new image $file_name to database
+                // $post->update(['imageurl' => $file_name]);
+                
+                $destinationPath="upload";
+                $file=$request->imageurl;
+                $extension=$file->getClientOriginalExtension();
+                $fileName=rand(1111,9999).".".$extension;
+                $file->move($destinationPath, $fileName);
+                $imageurl=$fileName;
             
-            if ($request->hasFile('image')) {
-                $request->file('image')->store('public/upload');
-                
-                // ensure every image has a different name
-                $file_name = $request->file('image')->hashName();
-                
-                // save new image $file_name to database
-                $post->update(['imageurl' => $file_name]);
             }
-
             return $post;
-
         }
     }
     
