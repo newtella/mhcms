@@ -50,6 +50,7 @@ class PostController extends Controller
         if($request->ajax())
         {
           
+          
             $post = Post::create($request->all());
 
             if ($request->hasFile('imageurl')) {
@@ -64,8 +65,9 @@ class PostController extends Controller
                 $file=$request->imageurl;
                 $extension=$file->getClientOriginalExtension();
                 $fileName=rand(1111,9999).".".$extension;
-                $file->move($destinationPath, $fileName);
-                $imageurl=$fileName;
+                $path = $file->move($destinationPath, $fileName);
+                $post->imageurl=$path;
+                $post->update();
             
             }
             return $post;

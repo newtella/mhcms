@@ -217,18 +217,18 @@ $('#frm-insert').on('submit', function(e){
 
 	e.preventDefault();
 	  var datos = $(this).serializeArray(); //datos serializados
-      var imagen = new FormData($('#frm-insert')[0]);
+      var file = new FormData($('#frm-insert')[0]);
 
 		//agregaremos los datos serializados al objecto imagen
 		$.each(datos,function(key,input){
-			imagen.append(input.name,input.value);
+			file.append(input.name,input.value);
 		});
 		
   
 
     $.ajax({
         url: "{{url('articles')}}", // point to server-side PHP script
-        data: imagen,
+        data: file,
         type: 'POST',
 		async: 	true,
         contentType: false, //'application/json', // The content type used when sending data to the server.
@@ -237,7 +237,7 @@ $('#frm-insert').on('submit', function(e){
         processData: false,
         success: function(data) {
 			console.log(data);
-			console.log(imagen);
+			console.log(file);
 			
 			{
 				$('#add_new_article_modal').modal('hide');
