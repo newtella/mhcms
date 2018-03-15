@@ -13,12 +13,12 @@ class DatabaseSeeder extends Seeder
     {
          //$this->call(UsersTableSeeder::class);
          $this->call([
-            //CategoriesTableSeeder::class,
+            CategoriesTableSeeder::class,
             RolsTableSeeder::class,
             TagsTableSeeder::class,
             UsersTableSeeder::class,
-            //PostsTableSeeder::class,
-            //CommentsTableSeeder::class,
+            // PostsTableSeeder::class,
+            // CommentsTableSeeder::class,
         ]);
     }
 }
