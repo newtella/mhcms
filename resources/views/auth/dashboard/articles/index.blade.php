@@ -84,8 +84,8 @@
 						<input id="user_id" name="user_id" type="hidden" value="{{ Auth::user()->id}}" />
 
 						<div class="form-group">
-    						<label for="imageurl">File input</label>
-    						<input name="imageurl" type="file" class="form-control" id="imageurl">
+    						<label for="image">File input</label>
+    						<input name="image" type="file" class="form-control" id="image">
     						
   						</div>
 						<div class="form-group">
@@ -222,7 +222,7 @@
 	var _category_id = $('#category_id').val();
     var _body = $('#summernote').val();
 	var _user_id = $('#user_id').val();
-    var _imageurl = $('#imageurl').prop('files')[0];
+    var _image = $('#image').prop('files')[0];
 
 
     var form_data = new FormData();
@@ -231,11 +231,13 @@
     form_data.append('slug', _slug);
 	form_data.append('user_id', _user_id);
 	form_data.append('body', _body);
-    form_data.append('image', '');
-    form_data.append('imageurl', _imageurl);
+    form_data.append('imageurl', '');
+	form_data.append('image', _image);
+	form_data.append('excerpt', '');
+	form_data.append('status', '');
 
-	console.log(form_data.get('imageurl'))
 	
+	console.log(form_data.values())
     $.ajaxSetup({
         headers: {
             'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
@@ -250,6 +252,8 @@
         cache: false, // To unable request pages to be cached
         processData: false,
         success: function(data) {
+
+			console.log(data)
             // aqui haces lo que queras...
         }
     });

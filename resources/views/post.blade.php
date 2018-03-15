@@ -72,6 +72,7 @@
             <div class="col-md-12">
                 <div class="comments">
                     <ul id="listComments" class="list-group">
+
                             
                     </ul>
                 </div>
@@ -104,10 +105,12 @@
                 success: function(response)
                 {
                     $.each(response, function(i, value){
-                        var elemento = $('<li class="list-group-item" />');
+                        
+                        var elemento = $('<li class="list-group-item"/>');
                         elemento.append($('<strong />', {
                             text : value.name
                         }));
+
                         elemento.append($('<strong />', {
                             text : value.body
                         }));
