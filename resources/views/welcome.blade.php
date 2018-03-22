@@ -41,7 +41,7 @@
                 <div class="panel-body">
                   <div class="contaniner">
                     <div class="col-md-6">
-                    {{$post->excerpt}}
+                    {!! str_limit($post->body, 5, '...')!!}
                     </div>
                     <div class="col-md-6">
                       @if($post->imageurl)

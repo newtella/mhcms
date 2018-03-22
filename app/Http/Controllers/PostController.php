@@ -6,6 +6,7 @@ use App\Post;
 use App\Category;
 use App\User;
 use Illuminate\Http\Request;
+use File;
 
 class PostController extends Controller
 {
@@ -46,24 +47,33 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-
+        if($request->ajax())
+        {
           
-        $ruta = $request->imageurl->store('public/upload'); // la ruta public/uploads debe existir en la carpeta storage de la estructura de carpetas de laravel
-        $request->image = $ruta;
-        $post = Post::create($request->all());
+          
+            $post = Post::create($request->all());
 
-        return $post;
+            if ($request->hasFile('imageurl')) {
 
-        // if($request->ajax())
-        // {
-        //     $path = $request->file('imageurl')->storeAs('upload');
-        //     $post = Post::create($request->all());
-           
-        
-        //    return $post;
-        // }
-        
+                // $request->file('imageurl')->storeAs('public/upload');
+                // // ensure every image has a different name
+                // $file_name = $request->file('imageurl')->hashName();
+                // // save new image $file_name to database
+                // $post->update(['imageurl' => $file_name]);
+                
+                $destinationPath="upload";
+                $file=$request->imageurl;
+                $extension=$file->getClientOriginalExtension();
+                $fileName=rand(1111,9999).".".$extension;
+                $path = $file->move($destinationPath, $fileName);
+                $post->imageurl=$path;
+                $post->update();
+            
+            }
+            return $post;
+        }
     }
+    
 
     /**
      * Display the specified resource.
