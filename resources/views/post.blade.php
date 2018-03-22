@@ -3,13 +3,12 @@
 
 <div class="container">
     <div class="col-md-12">
-        <h2>{{$articulo->name}}</h2>
         <div class="panel panel-default">
                 <div class="panel-heading">
                 <h2>{{$articulo->name}}</h2>
                 </div>
                 <div class=" panel panel-body ">
-                <img class="media-object"  width="200px" src="{{asset('$articulo->imageurl')}}"  class="img-responsive" alt="">
+                <img class="media-object"  width="200px" src="{{asset($articulo->imageurl)}}"  class="img-responsive" alt="">
                 </div>
                 <div class="panel-body">
                     {!!$articulo->body!!}
@@ -25,7 +24,7 @@
                             <h3>{{str_limit($similar->name, 25)}}</h3>
                             <div class="panel-body">
                                 @if($similar->imageurl)
-                                    <img class="rbarresize" width="200px" class="media-object" src="{{asset('$similar->imageurl')}}" class="img-responsive"   alt="">
+                                    <img class="rbarresize" width="200px" class="media-object" src="{{asset($similar->imageurl)}}" class="img-responsive"   alt="">
                                 @endif
                                 <p>{!! str_limit($similar->excerpt, 40)!!}</p>
                                 <p><a href="#" class="btn btn-primary" role="button">Button</a>

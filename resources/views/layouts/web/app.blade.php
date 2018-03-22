@@ -34,7 +34,6 @@
                             <li><a href="#features-sec">Tu Muni</a></li>
                             <li><a href="#advance-sec">Informacion Publica</a></li>
                             <li><a href="#gallery-sec">Solicitud de Informacion</a></li>
-                            <li><a href="#location-sec">Tramite y Servicios</a></li>
                         </ul>
                     </div>
                     
