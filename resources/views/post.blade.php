@@ -110,8 +110,8 @@
                         
                         var elemento = $('<li class=" col-md-12 list-group-item"'+
                         '<div class="col-md-12">'+
-                            '<div class="col-md-2 text-center">'+
-                                '<img width="120px" class="img-responsive text-center "src="https://cdn.dribbble.com/users/124355/screenshots/2199042/profile_1x.png" alt="">'+
+                            '<div class="col-md-2">'+
+                                '<img width="100px" class="img-responsive" src="https://cdn.dribbble.com/users/124355/screenshots/2199042/profile_1x.png" alt="">'+
                                 ''+ value.name +''+
                                 
                             '</div>'+
