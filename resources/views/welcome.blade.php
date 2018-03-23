@@ -41,13 +41,13 @@
                 <div class="panel-body">
                   <div class="contaniner">
                     <div class="col-md-6">
-                    {!! str_limit($post->body, 5, '...')!!}
+                    {!! str_limit($post->excerpt)!!}
                     </div>
                     <div class="col-md-6">
                       @if($post->imageurl)
                         <div>
                           <div>
-                            <img width="300px" class="pull-right" src="{{$post->imageurl}}" class="img-responsive" alt="">
+                            <img width="300px" class="pull-right img-responsive" src="{{$post->imageurl}}" class="img-responsive" alt="">
                           </div>
                         </div>
                       @endif
@@ -55,7 +55,7 @@
                   </div>
                 </div>
                 <div class="panel-body">
-                <a class=" btn btn-primary pull-right" href="{{$post->category->slug}}/{{$post->slug}}">Leer Mas</a>
+                <a class="btn btn-primary pull-right" href="{{$post->category->slug}}/{{$post->slug}}">Leer Mas</a>
                 </div>
                   
                   

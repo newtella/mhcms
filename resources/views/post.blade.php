@@ -9,7 +9,7 @@
                 <h2>{{$articulo->name}}</h2>
                 </div>
                 <div class=" panel panel-body ">
-                <img class="media-object"  width="200px" src="{{asset($articulo->imageurl)}}"  class="img-responsive" alt="">
+                <img class="media-object img-responsive"  width="600px" src="{{asset($articulo->imageurl)}}" alt="">
                 </div>
                 <div class="panel-body">
                     {!!$articulo->body!!}
@@ -19,16 +19,19 @@
    
         <h3>Articulos Relacionados</h3>
         @foreach($similarpost as $similar)
-                <div class="col-md-3"> 
+                <div class="col-md-4"> 
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h3>{{str_limit($similar->name, 25)}}</h3>
+                            
                             <div class="panel-body">
+                            <h4>{{str_limit($similar->name, 30)}}</h4>
                                 @if($similar->imageurl)
-                                    <img class="rbarresize" width="200px" class="media-object" src="{{asset($similar->imageurl)}}" class="img-responsive"   alt="">
+                                    <img class="rbarresize" width="200px" class=" img-responsive media-object" src="{{asset($similar->imageurl)}}"  alt="">
                                 @endif
-                                <p>{!! str_limit($similar->excerpt, 40)!!}</p>
-                                <p><a href="#" class="btn btn-primary" role="button">Button</a>
+                                <p>{!! str_limit($similar->excerpt, 80)!!}</p>
+                                <div class="panel-footer">
+                                <p><a href="#" class="btn btn-primary pull-right" role="button">Ver Noticia</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -69,11 +72,10 @@
             </div>
         </div> 
          
-            <div class="col-md-12">
+        <div class="col-md-12">
                 <div class="comments">
-                    <ul id="listComments" class="list-group">
-
-                            
+                    <ul id="listComments" class="list-group ">
+                        
                     </ul>
                 </div>
             </div>
@@ -106,15 +108,31 @@
                 {
                     $.each(response, function(i, value){
                         
-                        var elemento = $('<li class="list-group-item"/>');
-                        elemento.append($('<strong />', {
-                            text : value.name
-                        }));
-
-                        elemento.append($('<strong />', {
-                            text : value.body
-                        }));
+                        var elemento = $('<li class=" col-md-12 list-group-item"'+
+                        '<div class="col-md-12">'+
+                            '<div class="col-md-2 text-center">'+
+                                '<img width="120px" class="img-responsive text-center "src="https://cdn.dribbble.com/users/124355/screenshots/2199042/profile_1x.png" alt="">'+
+                                ''+ value.name +''+
+                                
+                            '</div>'+
+                            '<div class="panel panel-primary col-md-10">'+
+                                
+                                '<h4>'+ value.body +'</h4>'+
+                                
+                            
+                            '</div>'+
+                            '</div>'+
+                            '</li>');
+                        
+                            
+                        
+                        
+                        
                         $("#listComments").append(elemento);
+                        
+
+                    
+                        
                     });
                 }
             });
