@@ -3,11 +3,17 @@
 
 <div class="container">
     <div class="col-md-12">
-        <h2>{{$articulo->name}}</h2>
+        <h2 class=" whitefont">{{$articulo->name}}</h2>
         <div class="panel panel-default">
                 <div class="panel-heading">
-                <h2>{{$articulo->name}}</h2>
+                    <h4 class="text-success">Publicado por:</h4>
+                    <h3 class="panel-title"> 
+                        <i class="fas fa-user" style="color: #04B486;"></i> {{$articulo->user->username}}</h3>
+                        <h3 class="panel-title"> 
+                        <i class="fas fa-calendar" style="color: #04B486;"></i> {{$articulo->created_at}}</h3>
+            
                 </div>
+
                 <div class=" panel panel-body ">
                 <img class="media-object img-responsive"  width="600px" src="{{asset($articulo->imageurl)}}" alt="">
                 </div>
@@ -17,7 +23,7 @@
                 </div>
         </div>
    
-        <h3>Articulos Relacionados</h3>
+        <h3 class="cinzelfont whitefont">Articulos Relacionados</h3>
         @foreach($similarpost as $similar)
                 <div class="col-md-4"> 
                     <div class="panel panel-default">
@@ -29,7 +35,7 @@
                                     <img class="rbarresize" width="200px" class=" img-responsive media-object" src="{{asset($similar->imageurl)}}"  alt="">
                                 @endif
                                 <p>{!! str_limit($similar->excerpt, 80)!!}</p>
-                                <div class="panel-footer">
+                                <div class="">
                                 <p><a href="#" class="btn btn-primary pull-right" role="button">Ver Noticia</a>
                                 </div>
                             </div>
@@ -73,10 +79,11 @@
         </div> 
          
         <div class="col-md-12">
+        <h1 class="cinzelfont whitefont"><i class="fas fa-comment" style="color: #04B486;"></i> Comentarios </h1>
                 <div class="comments">
-                    <ul id="listComments" class="list-group ">
+                        <ul id="listComments" class="list-group ">
                         
-                    </ul>
+                        </ul>
                 </div>
             </div>
 </div>          
@@ -105,38 +112,54 @@
                 type: 'GET',
                 data: { id: _id },
                 success: function(response)
-                {
-                    $.each(response, function(i, value){
+                { 
+                    if(response[0] >='0' ){
+                        $.each(response, function(i, value){
                         
-                        var elemento = $('<li class=" col-md-12 list-group-item"'+
-                        '<div class="col-md-12">'+
-                            '<div class="col-md-2">'+
-                                '<img width="100px" class="img-responsive" src="https://cdn.dribbble.com/users/124355/screenshots/2199042/profile_1x.png" alt="">'+
-                                ''+ value.name +''+
-                                
-                            '</div>'+
-                            '<div class="panel panel-primary col-md-10">'+
-                                
-                                '<h4>'+ value.body +'</h4>'+
-                                
+                            var elemento = $('<li class=" col-md-offset-2 col-md-10 list-group-item"'+
+                                            '<div class=" col-md-10">'+
+                                            '<div class="col-md-2">'+
+                                            '<img width="100px" class="img-responsive" src="https://cdn.dribbble.com/users/124355/screenshots/2199042/profile_1x.png" alt="">'+
+                                            ''+ value.name +''+
+                                            '</div>'+
+                                            '<div class="panel panel-primary col-md-10">'+
+                                            '<h4>'+ value.body +'</h4>'+
+                                            '</div>'+
+                                            '</div>'+
+                                            '</li>');
+                                            $("#listComments").append(elemento);
+                             
+                                                            });
+                                            }
+
+                else{
+
+                        $.ajax({
+                        url: '../get-comments/',
+                        type: 'GET',
+                        data: { id: _id },
+                        success: function()
+                        {
+                        var elemento = $('<li class=" col-md-offset-2 col-md-10 list-group-item"'+
+                                        '<div class="panel panel-primary col-md-12">'+
+                                        '<h4 class="text-center">Esta noticia no tiene comentarios, se el primero en dejar el tuyo. </h4>'+    
+                                        '</div>'+
+                                        '</li>');
+                                        $("#listComments").append(elemento);
                             
-                            '</div>'+
-                            '</div>'+
-                            '</li>');
-                        
-                            
-                        
-                        
-                        
-                        $("#listComments").append(elemento);
+                                                    
                         
 
+                        }
+                                });     
+
+
+                    }
+                   
                     
-                        
-                    });
                 }
-            });
-
+            });           
+                
         }
 
         $('#frm-comment').on('submit', function(e){
