@@ -2,47 +2,97 @@
 @section('content')
 
 <div class="container">
-    <div class="col-md-12">
-        <h2 class=" whitefont">{{$articulo->name}}</h2>
+    <div class="col-md-9">
         <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="text-success">Publicado por:</h4>
-                    <h3 class="panel-title"> 
-                        <i class="fas fa-user" style="color: #04B486;"></i> {{$articulo->user->username}}</h3>
-                        <h3 class="panel-title"> 
-                        <i class="fas fa-calendar" style="color: #04B486;"></i> {{$articulo->created_at}}</h3>
-            
+                <div class="col-md-12">
+                   
+                        <div class="col-md-6 panel-heading">
+                            <img width="75px" class="img-responsive pull-left" src="/upload/user.png" alt="">
+                        <div class="col-md-6">publicado el {{date('d-m-y', strtotime($articulo->created_at))}} </div>
+                        <div class="col-md-6"> por {{$articulo->user->username}}</div> 
+                    </div>
                 </div>
 
-                <div class=" panel panel-body ">
-                <img class="media-object img-responsive"  width="600px" src="{{asset($articulo->imageurl)}}" alt="">
-                </div>
-                <div class="panel-body">
+
+
+
+
+
+                
+                    <div class=" jumbotron whitefont col-md-12" style="background: url('{{asset($articulo->imageurl)}}') no-repeat center center;">
+                    <div class="container">
+                    <div class="col-md-12">
+                    <h2>{{$articulo->name}}</h2>
+                    </div>
+                    <div class="col-md-12">
+                    <h4>{{$articulo->excerpt}}</h4>
+                    </div>
+                    </div>
+                    </div>
+                    
+                
+
+                <div class="panel panel-body">
                     {!!$articulo->body!!}
                     <input type="hidden" id="post_id" value="{{$articulo->id}}">
                 </div>
+
+                </div>
+                
         </div>
    
-        <h3 class="cinzelfont whitefont">Articulos Relacionados</h3>
-        @foreach($similarpost as $similar)
-                <div class="col-md-4"> 
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            
-                            <div class="panel-body">
-                            <h4>{{str_limit($similar->name, 30)}}</h4>
-                                @if($similar->imageurl)
-                                    <img class="rbarresize" width="200px" class=" img-responsive media-object" src="{{asset($similar->imageurl)}}"  alt="">
-                                @endif
-                                <p>{!! str_limit($similar->excerpt, 80)!!}</p>
-                                <div class="">
-                                <p><a href="#" class="btn btn-primary pull-right" role="button">Ver Noticia</a>
-                                </div>
+        
+        <div class="panel panel-default col-md-3">
+            <h3 class="">Tambien puede interesarte</h3>
+                @foreach($similarpost as $similar)
+                    <div class=" panel col-md-12"> 
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+                            <div class="panel panel-body">
+                                <h4>{{str_limit($similar->name, 30)}}</h4>
+                                    @if($similar->imageurl)
+                                        <img class="rbarresize" width="200px" class=" img-responsive media-object" src="{{asset($similar->imageurl)}}"  alt="">
+                                    @endif
+                                    <p>{!! str_limit($similar->excerpt, 80)!!}</p>
+                                    <div>
+                                    <p><a href="#" class="btn btn-primary pull-right" role="button">Ver Noticia</a>
+                                    </div>
+                            </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-        @endforeach
+                    </div>  
+                @endforeach
+        </div>
+
+
+
+
+        <div class="panel panel-default col-md-12">
+            <h3 class="">Tambien puede interesarte</h3>
+                @foreach($similarpost as $similar)
+                    <div class=" panel col-md-6"> 
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+                            <div class="panel panel-body">
+                                <h4>{{str_limit($similar->name, 30)}}</h4>
+                                    @if($similar->imageurl)
+                                        <img class="rbarresize" width="200px" class=" img-responsive media-object" src="{{asset($similar->imageurl)}}"  alt="">
+                                    @endif
+                                    <p>{!! str_limit($similar->excerpt, 80)!!}</p>
+                                    <div>
+                                    <p><a href="#" class="btn btn-primary pull-right" role="button">Ver Noticia</a>
+                                    </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>  
+                @endforeach
+        </div>
+        
+
+
+
+        
     </div>
 
     <div class="col-md-12">
@@ -113,14 +163,13 @@
                 data: { id: _id },
                 success: function(response)
                 { 
-                    if(response[0] >='0' ){
+                    if(response.length > 0 ){
                         $.each(response, function(i, value){
-                        
                             var elemento = $('<li class=" col-md-offset-2 col-md-10 list-group-item"'+
                                             '<div class=" col-md-10">'+
                                             '<div class="col-md-2">'+
-                                            '<img width="100px" class="img-responsive" src="https://cdn.dribbble.com/users/124355/screenshots/2199042/profile_1x.png" alt="">'+
-                                            ''+ value.name +''+
+                                            '<img width="100px" class="img-responsive center-block" src="https://cdn.dribbble.com/users/124355/screenshots/2199042/profile_1x.png" alt="">'+
+                                            '<p class="text-center">'+ value.name +'</p>'+
                                             '</div>'+
                                             '<div class="panel panel-primary col-md-10">'+
                                             '<h4>'+ value.body +'</h4>'+
@@ -130,6 +179,8 @@
                                             $("#listComments").append(elemento);
                              
                                                             });
+
+
                                             }
 
                 else{
@@ -155,12 +206,15 @@
 
 
                     }
+
+
                    
                     
                 }
             });           
                 
-        }
+
+                                        }
 
         $('#frm-comment').on('submit', function(e){
             e.preventDefault();
