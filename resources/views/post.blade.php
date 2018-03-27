@@ -2,6 +2,7 @@
 @section('content')
 
 <div class="container">
+<<<<<<< HEAD
     <div class="col-md-12">
         <div class="panel panel-default">
                 <div class="panel-heading">
@@ -9,13 +10,48 @@
                 </div>
                 <div class=" panel panel-body ">
                 <img class="media-object"  width="200px" src="{{asset($articulo->imageurl)}}"  class="img-responsive" alt="">
+=======
+    <div class="col-md-9">
+        <div class="panel panel-default">
+                <div class="col-md-12">
+                   
+                        <div class="col-md-6 panel-heading">
+                            <img width="75px" class="img-responsive pull-left" src="/upload/user.png" alt="">
+                        <div class="col-md-6">publicado el {{date('d-m-y', strtotime($articulo->created_at))}} </div>
+                        <div class="col-md-6"> por {{$articulo->user->username}}</div> 
+                    </div>
+>>>>>>> master
                 </div>
-                <div class="panel-body">
+
+
+
+
+
+
+                
+                    <div class=" jumbotron whitefont col-md-12" style="background: url('{{asset($articulo->imageurl)}}') no-repeat center center;">
+                    <div class="container">
+                    <div class="col-md-12">
+                    <h2>{{$articulo->name}}</h2>
+                    </div>
+                    <div class="col-md-12">
+                    <h4>{{$articulo->excerpt}}</h4>
+                    </div>
+                    </div>
+                    </div>
+                    
+                
+
+                <div class="panel panel-body">
                     {!!$articulo->body!!}
                     <input type="hidden" id="post_id" value="{{$articulo->id}}">
                 </div>
+
+                </div>
+                
         </div>
    
+<<<<<<< HEAD
         <h3>Articulos Relacionados</h3>
         @foreach($similarpost as $similar)
                 <div class="col-md-3"> 
@@ -28,11 +64,60 @@
                                 @endif
                                 <p>{!! str_limit($similar->excerpt, 40)!!}</p>
                                 <p><a href="#" class="btn btn-primary" role="button">Button</a>
+=======
+        
+        <div class="panel panel-default col-md-3">
+            <h3 class="">Tambien puede interesarte</h3>
+                @foreach($similarpost as $similar)
+                    <div class=" panel col-md-12"> 
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+                            <div class="panel panel-body">
+                                <h4>{{str_limit($similar->name, 30)}}</h4>
+                                    @if($similar->imageurl)
+                                        <img class="rbarresize" width="200px" class=" img-responsive media-object" src="{{asset($similar->imageurl)}}"  alt="">
+                                    @endif
+                                    <p>{!! str_limit($similar->excerpt, 80)!!}</p>
+                                    <div>
+                                    <p><a href="#" class="btn btn-primary pull-right" role="button">Ver Noticia</a>
+                                    </div>
+                            </div>
+>>>>>>> master
                             </div>
                         </div>
-                    </div>
-                </div>
-        @endforeach
+                    </div>  
+                @endforeach
+        </div>
+
+
+
+
+        <div class="panel panel-default col-md-12">
+            <h3 class="">Tambien puede interesarte</h3>
+                @foreach($similarpost as $similar)
+                    <div class=" panel col-md-6"> 
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+                            <div class="panel panel-body">
+                                <h4>{{str_limit($similar->name, 30)}}</h4>
+                                    @if($similar->imageurl)
+                                        <img class="rbarresize" width="200px" class=" img-responsive media-object" src="{{asset($similar->imageurl)}}"  alt="">
+                                    @endif
+                                    <p>{!! str_limit($similar->excerpt, 80)!!}</p>
+                                    <div>
+                                    <p><a href="#" class="btn btn-primary pull-right" role="button">Ver Noticia</a>
+                                    </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>  
+                @endforeach
+        </div>
+        
+
+
+
+        
     </div>
 
     <div class="col-md-12">
@@ -68,12 +153,12 @@
             </div>
         </div> 
          
-            <div class="col-md-12">
+        <div class="col-md-12">
+        <h1 class="cinzelfont whitefont"><i class="fas fa-comment" style="color: #04B486;"></i> Comentarios </h1>
                 <div class="comments">
-                    <ul id="listComments" class="list-group">
-
-                            
-                    </ul>
+                        <ul id="listComments" class="list-group ">
+                        
+                        </ul>
                 </div>
             </div>
 </div>          
@@ -102,23 +187,59 @@
                 type: 'GET',
                 data: { id: _id },
                 success: function(response)
-                {
-                    $.each(response, function(i, value){
+                { 
+                    if(response.length > 0 ){
+                        $.each(response, function(i, value){
+                            var elemento = $('<li class=" col-md-offset-2 col-md-10 list-group-item"'+
+                                            '<div class=" col-md-10">'+
+                                            '<div class="col-md-2">'+
+                                            '<img width="100px" class="img-responsive center-block" src="https://cdn.dribbble.com/users/124355/screenshots/2199042/profile_1x.png" alt="">'+
+                                            '<p class="text-center">'+ value.name +'</p>'+
+                                            '</div>'+
+                                            '<div class="panel panel-primary col-md-10">'+
+                                            '<h4>'+ value.body +'</h4>'+
+                                            '</div>'+
+                                            '</div>'+
+                                            '</li>');
+                                            $("#listComments").append(elemento);
+                             
+                                                            });
+
+
+                                            }
+
+                else{
+
+                        $.ajax({
+                        url: '../get-comments/',
+                        type: 'GET',
+                        data: { id: _id },
+                        success: function()
+                        {
+                        var elemento = $('<li class=" col-md-offset-2 col-md-10 list-group-item"'+
+                                        '<div class="panel panel-primary col-md-12">'+
+                                        '<h4 class="text-center">Esta noticia no tiene comentarios, se el primero en dejar el tuyo. </h4>'+    
+                                        '</div>'+
+                                        '</li>');
+                                        $("#listComments").append(elemento);
+                            
+                                                    
                         
-                        var elemento = $('<li class="list-group-item"/>');
-                        elemento.append($('<strong />', {
-                            text : value.name
-                        }));
 
-                        elemento.append($('<strong />', {
-                            text : value.body
-                        }));
-                        $("#listComments").append(elemento);
-                    });
+                        }
+                                });     
+
+
+                    }
+
+
+                   
+                    
                 }
-            });
+            });           
+                
 
-        }
+                                        }
 
         $('#frm-comment').on('submit', function(e){
             e.preventDefault();

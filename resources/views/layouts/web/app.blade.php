@@ -94,15 +94,12 @@
 @yield('content')
 
 
-<!-- <div class="navbar navbar-default navbar-fixed-bottom">
-    		<div class="">
-      			<p class="navbar-text pull-left">© 2018 - Municipalidad de Huite, Zacapa, Guatemala.
-           			
-				  </p>
-				  <a class="navbar-text text-danger pull-right" href="#inicio" >MuniHuite.com.gt</a>
+ <footer class="footer">
+    		<div class="container">
+      			<p class="text-muted whitefont">© 2018 - Intelguasoft Web Development.</p>
     		</div>
- 		</div>
-                 -->
+</footer>
+                 
         
 
 

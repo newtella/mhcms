@@ -26,39 +26,50 @@
         
       
 <!-- relevant content slides view: rslides.blade.php -->
-    @include('rslides') 
+    
+
 <!-- relevant content slides end -->
 
   <div class="container">
     <div class="panel panel-body backgbody">
       <h2 class="cinzelfont whitefont">Ultimas Publicaciones</h2>
-      <div class="col-md-9 ">
+      <div class="col-md-9">
           @foreach($posts as $post)
             <div class="panel panel-default shadowedbox">
-              <div class="panel-heading">
-                <a style="font-size: 25px; color:saddlebrown;" class="courgettefont" href="{{$post->category->slug}}/{{$post->slug}}">{{$post->name}}</a>
-              </div> 
                 <div class="panel-body">
                   <div class="contaniner">
-                    <div class="col-md-6">
-                    {{$post->excerpt}}
-                    </div>
-                    <div class="col-md-6">
+                  <div class="col-md-6">
                       @if($post->imageurl)
-                        <div>
-                          <div>
-                            <img width="300px" class="pull-right" src="{{$post->imageurl}}" class="img-responsive" alt="">
+                        <div class="">
+                          <div class="">
+                            <img width="400px" class="pull-left img-responsive" src="{{$post->imageurl}}" alt="">
+                            
                           </div>
+                          
                         </div>
                       @endif
+                      
                     </div>
+                    <div class="col-md-6">
+                    <div class="panel-heading">
+                      <a style="font-size: 25px; color:saddlebrown;" class="courgettefont" href="{{$post->category->slug}}/{{$post->slug}}">{{$post->name}}</a>
+                    </div>
+                    <div class="col-md-12">
+                    <i class="fas fa-user" style="color: #888888;"></i> {{$post->user->username}}
+                    <i class="fas fa-calendar" style="color: #888888;"></i> {{date('d-m-y', strtotime($post->created_at))}}
+                    <i class="fas fa-folder" style="color: #888888;"></i> {{$post->category->name}}
+                    </div>
+                    <div class="panel-heading col-md-12">
+                    {!! str_limit($post->excerpt)!!}
+                    </div>
+                    <div class="panel-heading col-md-12">
+                    <a class="btn btn-primary pull-left" href="{{$post->category->slug}}/{{$post->slug}}">Leer Mas</a>
+                    </div>
+                    </div>
+                    
                   </div>
+  
                 </div>
-                <div class="panel-body">
-                <a class=" btn btn-primary pull-right" href="{{$post->category->slug}}/{{$post->slug}}">Leer Mas</a>
-                </div>
-                  
-                  
             </div>
           @endforeach
             {{$posts->render()}}
