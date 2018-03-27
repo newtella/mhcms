@@ -6,13 +6,13 @@
         <div class="panel panel-default">
                 <div class="col-md-12">
                         <div class="col-md-6 panel-heading">
-                            <img width="75px" class="img-responsive pull-left" src="/upload/user.png" alt="">
-                        <div class="col-md-6">publicado el {{date('d-m-y', strtotime($articulo->created_at))}} </div>
-                        <div class="col-md-6"> por {{$articulo->user->username}}</div> 
-                    </div>
+                            <img width="50px" class="img-responsive pull-left" src="/upload/user.png" alt="">
+                            <div class="col-md-6">publicado el {{date('d-m-y', strtotime($articulo->created_at))}} </div>
+                            <div class="col-md-6"> por {{$articulo->user->username}}</div> 
+                        </div>
                 </div>
-
-            <div class=" jumbotron whitefont col-md-12" style="background: url('{{asset($articulo->imageurl)}}') no-repeat center center;">
+                <div class="panel">
+            <div class="jumbotron whitefont col-md-12" style="background: url('{{asset($articulo->imageurl)}}') no-repeat center center;">
                 <div class="container">
                     <div class="col-md-12">
                         <h2>{{$articulo->name}}</h2>
@@ -21,6 +21,7 @@
                         <h4>{{$articulo->excerpt}}</h4>
                     </div>
                 </div>
+            </div>
             </div>
                     
             <div class="panel panel-body">
@@ -111,6 +112,7 @@
             </ul>
         </div>
 </div>
+
 @endsection
 @section('script')
 	<script type="text/javascript">

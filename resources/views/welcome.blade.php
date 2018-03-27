@@ -20,7 +20,7 @@
    
     <div class="container">
       <a href="#">
-        <img class="rbarresize" src="https://munihuite.gob.gt/wp-content/uploads/2016/05/BannerHuite.png" alt="...">
+        <img class="rbarresize" src="/upload/BannerHuite.png" alt="...">
       </a>
     </div>
         
@@ -42,7 +42,7 @@
                       @if($post->imageurl)
                         <div class="">
                           <div class="">
-                            <img width="400px" class="pull-left img-responsive" src="{{$post->imageurl}}" alt="">
+                            <img width="600px" class="pull-left img-responsive" src="{{$post->imageurl}}" alt="">
                             
                           </div>
                           
@@ -76,21 +76,21 @@
       </div>
       <!-- right Bar 1-->
     <div class="col-md-3">
-      <div>
+      
         <div class="row">
             <a href="#" class="pull-right">
-              <img class="rbarresize" src="https://i0.wp.com/munihuite.gob.gt/wp-content/uploads/2018/01/Administracion2016-2020.png?ssl=1" alt="...">
+              <img width="800px" class="rbarresize image-responsive" src="https://i0.wp.com/munihuite.gob.gt/wp-content/uploads/2018/01/Administracion2016-2020.png?ssl=1" alt="...">
             </a>
         </div>
-      </div>
+     
 <!-- right Bar 2-->
-      <div>
+      
         <div class="row">
             <a href="#" class="pull-right">
-              <img class="rbarresize" src="https://i1.wp.com/muniteculutan.gob.gt/wp-content/uploads/2016/04/Flor-de-la-Feria-1.jpg?w=852&ssl=1" alt="...">
+              <img class="rbarresize image-responsive" src="https://i1.wp.com/muniteculutan.gob.gt/wp-content/uploads/2016/04/Flor-de-la-Feria-1.jpg?w=852&ssl=1" alt="...">
             </a>
         </div>
-      </div>
+      
       <!-- End right Bar -->
       </div>
     </div>
