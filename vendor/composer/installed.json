@@ -3309,17 +3309,17 @@
     },
     {
         "name": "symfony/http-foundation",
-        "version": "v3.4.3",
-        "version_normalized": "3.4.3.0",
+        "version": "v3.4.46",
+        "version_normalized": "3.4.46.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/http-foundation.git",
-            "reference": "4a213be1cc8598089b8c7451529a2927b49b5d26"
+            "reference": "b9885fcce6fe494201da4f70a9309770e9d13dc8"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/http-foundation/zipball/4a213be1cc8598089b8c7451529a2927b49b5d26",
-            "reference": "4a213be1cc8598089b8c7451529a2927b49b5d26",
+            "url": "https://api.github.com/repos/symfony/http-foundation/zipball/b9885fcce6fe494201da4f70a9309770e9d13dc8",
+            "reference": "b9885fcce6fe494201da4f70a9309770e9d13dc8",
             "shasum": ""
         },
         "require": {
@@ -3330,13 +3330,8 @@
         "require-dev": {
             "symfony/expression-language": "~2.8|~3.0|~4.0"
         },
-        "time": "2018-01-03T17:14:19+00:00",
+        "time": "2020-10-24T10:57:07+00:00",
         "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "3.4-dev"
-            }
-        },
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
